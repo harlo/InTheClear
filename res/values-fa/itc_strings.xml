@@ -21,10 +21,10 @@
     <string name="KEY_17">صفر</string>
     <string name="KEY_PANIC_TITLE">هراس!</string>
     <string name="KEY_PANIC_MSG_TITLE">هراس Msg:</string>
-    <string name="KEY_PANIC_PROGRESS_1">ارسال وحشت خود را! پیام...</string>
-    <string name="KEY_PANIC_PROGRESS_2">پاک کردن داده های انتخاب شده از گوشی شما...</string>
+    <string name="KEY_PANIC_PROGRESS_1">ارسال وحشت خود را! پیام…</string>
+    <string name="KEY_PANIC_PROGRESS_2">پاک کردن داده های انتخاب شده از گوشی شما…</string>
     <string name="KEY_PANIC_ERROR_CONFIGUREDFRIENDS">لطفا تنظیمات و راه اندازی اولین اطلاعات هشدار خود را وارد کنید.</string>
-    <string name="KEY_PANIC_PROGRESS_3">تلفن شما ادامه خواهد داد به وحشت! هر 45 ثانیه تا زمانی که این فرآیند را لغو...</string>
+    <string name="KEY_PANIC_PROGRESS_3">تلفن شما ادامه خواهد داد به وحشت! هر 45 ثانیه تا زمانی که این فرآیند را لغو…</string>
     <string name="KEY_PANIC_NEXT_PANIC">هراس بعدی! به</string>
     <string name="KEY_PANIC_BTN_PANIC">هراس!</string>
     <string name="KEY_PANIC_MENU_CANCEL">لغو وحشت!</string>
@@ -89,7 +89,7 @@
     <string name="KEY_SHOUT_PREFSFAIL">شما لازم نیست هیچ دوستی پیکربندی شده است. لطفا ترجیحات من بدهید.</string>
     <string name="KEY_SHOUT_ENTERSHOUTMSG">پیغامی را که میخواهید برای فریاد زدن به شما دوستان پیکربندی را وارد کنید.</string>
     <string name="KEY_SHOUT_COUNTDOWNMSG">پیامهای! به</string>
-    <string name="KEY_SECONDS">ثانیه...</string>
+    <string name="KEY_SECONDS">ثانیه…</string>
     <string name="KEY_SHOUT_COUNTDOWNCANCEL">(منو لغو این فریاد)</string>
     <string name="KEY_WIPE_ACTIVITYTEXT">WARNING: این نیز از داده های واقعی از PHONE.\n\nSelect شما یک یا بیشتر از انواع داده های زیر را برای از بین بردن را حذف کنید.</string>
     <string name="KEY_WIPE_WIPECONTACTS">پاک تماس با ما</string>
@@ -170,7 +170,7 @@
     <string name="KEY_WIPE_EDIT_WIPE">ویرایش پاک</string>
     <string name="KEY_WIZARD_TITLE">راه اندازی InTheClear</string>
     <string name="KEY_WIZARD_TESTING_SMS_TITLE">تست اس ام اس اضطراری</string>
-    <string name="KEY_WIZARD_PLEASE_WAIT">لطفا صبر کنید...</string>
+    <string name="KEY_WIZARD_PLEASE_WAIT">لطفا صبر کنید…</string>
 
     <string-array name="WIZARD_TITLES">
         <item>راه اندازی InTheClear</item>

@@ -13,9 +13,9 @@
     <string name="KEY_WIPE_SETTINGS_TITLE">InTheClear 擦拭数据设置</string>
     <string name="KEY_PANIC_TITLE">求助！</string>
     <string name="KEY_PANIC_MSG_TITLE">求助信息:</string>
-    <string name="KEY_PANIC_PROGRESS_1">发送你的求助短信...</string>
-    <string name="KEY_PANIC_PROGRESS_2">正在从手机里擦拭被选定的数据...</string>
-    <string name="KEY_PANIC_PROGRESS_3">除非你取消进程，否则你的手机每45秒便会求助一次...</string>
+    <string name="KEY_PANIC_PROGRESS_1">发送你的求助短信…</string>
+    <string name="KEY_PANIC_PROGRESS_2">正在从手机里擦拭被选定的数据…</string>
+    <string name="KEY_PANIC_PROGRESS_3">除非你取消进程，否则你的手机每45秒便会求助一次…</string>
     <string name="KEY_PANIC_NEXT_PANIC">距离下一次求助</string>
     <string name="KEY_PANIC_BTN_PANIC">求助！</string>
     <string name="KEY_PANIC_MENU_CANCEL">取消求助！</string>
@@ -77,7 +77,7 @@
     <string name="KEY_SHOUT_PREFSFAIL">您没有配置任何好友。请确认您的参数。</string>
     <string name="KEY_SHOUT_ENTERSHOUTMSG">输入您想向您配置的好友进行呼救的消息。</string>
     <string name="KEY_SHOUT_COUNTDOWNMSG">将发送紧急消息在</string>
-    <string name="KEY_SECONDS">秒内...</string>
+    <string name="KEY_SECONDS">秒内…</string>
     <string name="KEY_SHOUT_COUNTDOWNCANCEL">取消本条紧急消息</string>
     <string name="KEY_WIPE_ACTIVITY_TITLE">数据擦拭</string>
     <string name="KEY_WIPE_ACTIVITYTEXT">选择您要从手机存储器中擦除的部分。选择\"编辑\"更改擦除项。</string>
@@ -93,7 +93,7 @@
     <string name="KEY_WIPE_CONFIRMSELECT">完成</string>
     <string name="KEY_WIPE_FOLDERSELECTIONTEXT">您已完成擦拭SD卡文件夹选择。</string>
     <string name="KEY_WIPE_NOSELECTEDFOLDERS">您未选择任何文件夹，或者取消了文件夹擦拭，所以不会擦拭您SD卡上的任何文件夹</string>
-    <string name="KEY_WIPE_VIEWSELECTEDFOLDERS">查看/更改已选文件夹...</string>
+    <string name="KEY_WIPE_VIEWSELECTEDFOLDERS">查看/更改已选文件夹…</string>
     <string name="KEY_WIPE_CONFIRM_PHOTOS">照片已被擦拭!</string>
     <string name="KEY_WIPE_CONFIRM_CONTACTS">所有联系人已被擦拭!</string>
     <string name="KEY_WIPE_CONFIRM_CALLLOG">通话记录已被擦拭!</string>
@@ -110,7 +110,7 @@
     <string name="KEY_WIZARD_ENABLE">开启</string>
     <string name="KEY_WIZARD_SEND">发送</string>
     <string name="KEY_WIZARD_TESTING_SMS_TITLE">测试紧急短信</string>
-    <string name="KEY_WIZARD_PLEASE_WAIT">请稍等...</string>
+    <string name="KEY_WIZARD_PLEASE_WAIT">请稍等…</string>
 
     <string-array name="WIZARD_TITLES">
         <item>InTheClear 设置</item>

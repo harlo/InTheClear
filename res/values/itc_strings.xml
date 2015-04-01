@@ -13,9 +13,9 @@
     <string name="KEY_WIPE_SETTINGS_TITLE">InTheClear Data Wipe Settings</string>
     <string name="KEY_PANIC_TITLE">Panic!</string>
     <string name="KEY_PANIC_MSG_TITLE">Panic Message:</string>
-    <string name="KEY_PANIC_PROGRESS_1">Sending your Panic! message...</string>
-    <string name="KEY_PANIC_PROGRESS_2">Wiping selected data from your phone...</string>
-    <string name="KEY_PANIC_PROGRESS_3">Your phone will continue to Panic! every 45 seconds until you cancel this process...</string>
+    <string name="KEY_PANIC_PROGRESS_1">Sending your Panic! message…</string>
+    <string name="KEY_PANIC_PROGRESS_2">Wiping selected data from your phone…</string>
+    <string name="KEY_PANIC_PROGRESS_3">Your phone will continue to Panic! every 45 seconds until you cancel this process…</string>
     <string name="KEY_PANIC_NEXT_PANIC">Next Panic! in </string>
     <string name="KEY_PANIC_BTN_PANIC">Panic!</string>
     <string name="KEY_PANIC_MENU_CANCEL">Cancel Panic!</string>
@@ -77,7 +77,7 @@
     <string name="KEY_SHOUT_PREFSFAIL">You do not have any friends configured.  Please check your preferences.</string>
     <string name="KEY_SHOUT_ENTERSHOUTMSG">Enter the message you want to shout to your configured friends.</string>
     <string name="KEY_SHOUT_COUNTDOWNMSG">Sending Emergency SMS in</string>
-    <string name="KEY_SECONDS">seconds...</string>
+    <string name="KEY_SECONDS">seconds…</string>
     <string name="KEY_SHOUT_COUNTDOWNCANCEL">Cancel this Emergency SMS</string>
     <string name="KEY_WIPE_ACTIVITY_TITLE">Data Wipe</string>
     <string name="KEY_WIPE_ACTIVITYTEXT">Select Wipe to erase the following portions of your phone\'s memory.  Choose \"Edit\" to change what\'s erased.</string>
@@ -93,7 +93,7 @@
     <string name="KEY_WIPE_CONFIRMSELECT">Done</string>
     <string name="KEY_WIPE_FOLDERSELECTIONTEXT">You have selected folders on your SD Card to be wiped.</string>
     <string name="KEY_WIPE_NOSELECTEDFOLDERS">You have not selected any folders, or have disabled folder wiping, so nothing on your SD Card will be wiped</string>
-    <string name="KEY_WIPE_VIEWSELECTEDFOLDERS">View/Modify selected folders...</string>
+    <string name="KEY_WIPE_VIEWSELECTEDFOLDERS">View/Modify selected folders…</string>
     <string name="KEY_WIPE_CONFIRM_PHOTOS">Photos have been wiped!</string>
     <string name="KEY_WIPE_CONFIRM_CONTACTS">All contacts have been wiped!</string>
     <string name="KEY_WIPE_CONFIRM_CALLLOG">Your call log has been wiped!</string>
@@ -110,7 +110,7 @@
     <string name="KEY_WIZARD_ENABLE">Enable</string>
     <string name="KEY_WIZARD_SEND">Send</string>
     <string name="KEY_WIZARD_TESTING_SMS_TITLE">Testing Emergency SMS</string>
-    <string name="KEY_WIZARD_PLEASE_WAIT">Please Wait...</string>
+    <string name="KEY_WIZARD_PLEASE_WAIT">Please Wait…</string>
 
     <string-array name="WIZARD_TITLES">
         <item>InTheClear Setup</item>

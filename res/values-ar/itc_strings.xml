@@ -21,10 +21,10 @@
     <string name="KEY_17">صفر</string>
     <string name="KEY_PANIC_TITLE">ذعر!</string>
     <string name="KEY_PANIC_MSG_TITLE">الذعر Msg:</string>
-    <string name="KEY_PANIC_PROGRESS_1">ارسال الذعر الخاص! الرسالة...</string>
-    <string name="KEY_PANIC_PROGRESS_2">مسح البيانات المحددة من الهاتف...</string>
+    <string name="KEY_PANIC_PROGRESS_1">ارسال الذعر الخاص! الرسالة…</string>
+    <string name="KEY_PANIC_PROGRESS_2">مسح البيانات المحددة من الهاتف…</string>
     <string name="KEY_PANIC_ERROR_CONFIGUREDFRIENDS">أرجو أن ترسلوا الإعداد الأولى لإدخال المعلومات الخاصة بك في حالة تأهب.</string>
-    <string name="KEY_PANIC_PROGRESS_3">وسوف تستمر في هاتفك الذعر! كل 45 ثانية حتى يتم إلغاء هذه العملية...</string>
+    <string name="KEY_PANIC_PROGRESS_3">وسوف تستمر في هاتفك الذعر! كل 45 ثانية حتى يتم إلغاء هذه العملية…</string>
     <string name="KEY_PANIC_NEXT_PANIC">القادم الذعر! في</string>
     <string name="KEY_PANIC_BTN_PANIC">ذعر!</string>
     <string name="KEY_PANIC_MENU_CANCEL">إلغاء الذعر!</string>
@@ -89,7 +89,7 @@
     <string name="KEY_SHOUT_PREFSFAIL">ليس لديك أي أصدقاء تكوينه. يرجى التحقق من خياراتك.</string>
     <string name="KEY_SHOUT_ENTERSHOUTMSG">أدخل الرسالة التي أريد أن أصرخ لأصدقائك تكوينه.</string>
     <string name="KEY_SHOUT_COUNTDOWNMSG">الصراخ! في</string>
-    <string name="KEY_SECONDS">ثانية...</string>
+    <string name="KEY_SECONDS">ثانية…</string>
     <string name="KEY_SHOUT_COUNTDOWNCANCEL">(إلغاء هذه صيحة في القائمة)</string>
     <string name="KEY_WIPE_ACTIVITYTEXT">هل هذا WARNING: إزالة البيانات الفعلية من PHONE.\n\nSelect YOUR أنواع البيانات واحد أو أكثر دون أن يمسح.</string>
     <string name="KEY_WIPE_WIPECONTACTS">محو الأسماء</string>
@@ -170,7 +170,7 @@
     <string name="KEY_WIPE_EDIT_WIPE">تحرير امسح</string>
     <string name="KEY_WIZARD_TITLE">InTheClear الإعداد</string>
     <string name="KEY_WIZARD_TESTING_SMS_TITLE">اختبار SMS الطوارئ</string>
-    <string name="KEY_WIZARD_PLEASE_WAIT">الرجاء الانتظار...</string>
+    <string name="KEY_WIZARD_PLEASE_WAIT">الرجاء الانتظار…</string>
 
     <string-array name="WIZARD_TITLES">
         <item>InTheClear الإعداد</item>
