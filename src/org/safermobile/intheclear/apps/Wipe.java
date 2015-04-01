@@ -1,19 +1,5 @@
 package org.safermobile.intheclear.apps;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.safermobile.intheclear.ITCConstants;
-import org.safermobile.intheclear.R;
-import org.safermobile.intheclear.controllers.PanicController;
-import org.safermobile.intheclear.controllers.WipeController;
-import org.safermobile.intheclear.controllers.WipeController.LocalBinder;
-import org.safermobile.intheclear.screens.WipePreferences;
-import org.safermobile.intheclear.ui.WipeDisplay;
-import org.safermobile.intheclear.ui.WipeDisplayAdaptor;
-import org.safermobile.utils.EndActivity;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -31,6 +17,19 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import org.safermobile.intheclear.ITCConstants;
+import org.safermobile.intheclear.R;
+import org.safermobile.intheclear.controllers.WipeController;
+import org.safermobile.intheclear.controllers.WipeController.LocalBinder;
+import org.safermobile.intheclear.screens.WipePreferences;
+import org.safermobile.intheclear.ui.WipeDisplay;
+import org.safermobile.intheclear.ui.WipeDisplayAdaptor;
+import org.safermobile.utils.EndActivity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Wipe extends Activity implements OnClickListener {
 	private SharedPreferences _sp;

@@ -1,33 +1,27 @@
 package org.safermobile.intheclear.apps;
 
-import org.safermobile.intheclear.ITCConstants;
-import org.safermobile.intheclear.ITCPreferences;
-import org.safermobile.intheclear.R;
-import org.safermobile.intheclear.controllers.ShoutController;
-import org.safermobile.utils.EndActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnDismissListener;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.safermobile.intheclear.ITCConstants;
+import org.safermobile.intheclear.ITCPreferences;
+import org.safermobile.intheclear.R;
+import org.safermobile.intheclear.controllers.ShoutController;
+import org.safermobile.utils.EndActivity;
 
 public class Shout extends Activity implements OnClickListener, OnDismissListener {
 	private SharedPreferences _sp;

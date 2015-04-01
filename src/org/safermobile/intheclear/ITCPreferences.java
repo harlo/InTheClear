@@ -1,8 +1,6 @@
 package org.safermobile.intheclear;
 
 
-import java.util.Locale;
-
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,10 +8,11 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.util.Log;
+
+import java.util.Locale;
 
 public class ITCPreferences extends PreferenceActivity implements OnPreferenceChangeListener {
 	PreferenceCategory pc;

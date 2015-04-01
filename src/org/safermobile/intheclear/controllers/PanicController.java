@@ -1,16 +1,5 @@
 package org.safermobile.intheclear.controllers;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.safermobile.intheclear.ITCConstants;
-import org.safermobile.intheclear.R;
-import org.safermobile.intheclear.apps.Panic;
-import org.safermobile.intheclear.data.PIMWiper;
-import org.safermobile.intheclear.ui.WipeDisplay;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -22,6 +11,17 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import org.safermobile.intheclear.ITCConstants;
+import org.safermobile.intheclear.R;
+import org.safermobile.intheclear.apps.Panic;
+import org.safermobile.intheclear.data.PIMWiper;
+import org.safermobile.intheclear.ui.WipeDisplay;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PanicController extends Service {
 	private NotificationManager nm;

@@ -1,22 +1,17 @@
 package org.safermobile.intheclear.controllers;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.safermobile.intheclear.ITCConstants;
-import org.safermobile.intheclear.R;
-import org.safermobile.intheclear.data.PIMWiper;
-import org.safermobile.utils.EndActivity;
-import org.safermobile.utils.FolderIterator;
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+
+import org.safermobile.intheclear.ITCConstants;
+import org.safermobile.intheclear.data.PIMWiper;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class WipeController extends Service {
 	boolean callbackAttached = false;

@@ -1,12 +1,12 @@
 package org.safermobile.intheclear.data;
 
-import org.safermobile.intheclear.ITCConstants;
-
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
+
+import org.safermobile.intheclear.ITCConstants;
 
 public class MovementTracker {
 	private static LocationManager lm;	

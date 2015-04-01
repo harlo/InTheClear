@@ -1,18 +1,18 @@
 package org.safermobile.intheclear.controllers;
 
-import java.util.Date;
-import java.util.StringTokenizer;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Message;
 
 import org.safermobile.intheclear.R;
 import org.safermobile.intheclear.data.MovementTracker;
 import org.safermobile.intheclear.data.PhoneInfo;
 import org.safermobile.intheclear.sms.SMSSender;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.os.Handler;
-import android.os.Message;
+import java.util.Date;
+import java.util.StringTokenizer;
 
 public class ShoutController {
 	Resources res;

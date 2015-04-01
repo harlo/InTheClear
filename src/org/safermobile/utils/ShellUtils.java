@@ -4,16 +4,14 @@ package org.safermobile.utils;
 
 
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
-
-import android.content.Intent;
-import android.util.Log;
 
 public class ShellUtils {
 	

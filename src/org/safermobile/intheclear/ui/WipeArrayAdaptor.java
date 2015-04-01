@@ -1,15 +1,6 @@
 package org.safermobile.intheclear.ui;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.safermobile.intheclear.ITCConstants;
-import org.safermobile.intheclear.R;
-import org.safermobile.intheclear.ui.WipeSelector.Color;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.safermobile.intheclear.R;
+import org.safermobile.intheclear.ui.WipeSelector.Color;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class WipeArrayAdaptor extends BaseAdapter {
 	private ArrayList<WipeSelector> _wipeSelector;

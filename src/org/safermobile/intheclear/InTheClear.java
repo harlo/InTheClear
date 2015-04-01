@@ -1,11 +1,5 @@
 package org.safermobile.intheclear;
 
-import java.util.Locale;
-
-import org.safermobile.intheclear.apps.Panic;
-import org.safermobile.intheclear.apps.Shout;
-import org.safermobile.intheclear.apps.Wipe;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -26,6 +20,12 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.safermobile.intheclear.apps.Panic;
+import org.safermobile.intheclear.apps.Shout;
+import org.safermobile.intheclear.apps.Wipe;
+
+import java.util.Locale;
 
 public class InTheClear extends Activity implements OnClickListener {
 	SharedPreferences _sp;

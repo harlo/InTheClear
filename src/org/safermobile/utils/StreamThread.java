@@ -1,9 +1,9 @@
 package org.safermobile.utils;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
-
-import android.util.Log;
 
 /**
  * Created by IntelliJ IDEA.

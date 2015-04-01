@@ -1,9 +1,5 @@
 package org.safermobile.intheclear.ui;
 
-import java.util.ArrayList;
-
-import org.safermobile.intheclear.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.safermobile.intheclear.R;
+
+import java.util.ArrayList;
 
 public class WipeDisplayAdaptor extends BaseAdapter {
 	private ArrayList<WipeDisplay> _wipeDisplay;

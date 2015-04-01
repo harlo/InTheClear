@@ -1,20 +1,10 @@
 package org.safermobile.intheclear;
 
-import java.util.ArrayList;
-import java.util.Map;
-
-import org.safermobile.intheclear.screens.WipePreferences;
-import org.safermobile.intheclear.sms.SMSSender;
-import org.safermobile.intheclear.sms.SMSTesterConstants;
-
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -34,12 +24,19 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.EditText;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.LinearLayout.LayoutParams;
+
+import org.safermobile.intheclear.screens.WipePreferences;
+import org.safermobile.intheclear.sms.SMSSender;
+import org.safermobile.intheclear.sms.SMSTesterConstants;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Wizard extends Activity implements OnClickListener, SMSTesterConstants {
 	int wNum,nextWizard,lastWizard = 0;

@@ -1,16 +1,5 @@
 package org.safermobile.intheclear.apps;
 
-import java.util.ArrayList;
-
-import org.safermobile.intheclear.ITCConstants;
-import org.safermobile.intheclear.ITCPreferences;
-import org.safermobile.intheclear.R;
-import org.safermobile.intheclear.controllers.PanicController;
-import org.safermobile.intheclear.controllers.PanicController.LocalBinder;
-import org.safermobile.intheclear.ui.WipeDisplay;
-import org.safermobile.intheclear.ui.WipeDisplayAdaptor;
-import org.safermobile.utils.EndActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,9 +8,9 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.IntentFilter;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -34,6 +23,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.safermobile.intheclear.ITCConstants;
+import org.safermobile.intheclear.ITCPreferences;
+import org.safermobile.intheclear.R;
+import org.safermobile.intheclear.controllers.PanicController;
+import org.safermobile.intheclear.controllers.PanicController.LocalBinder;
+import org.safermobile.intheclear.ui.WipeDisplayAdaptor;
+import org.safermobile.utils.EndActivity;
 
 public class Panic extends Activity implements OnClickListener, OnDismissListener {
 	

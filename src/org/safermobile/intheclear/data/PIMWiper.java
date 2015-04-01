@@ -1,17 +1,5 @@
 package org.safermobile.intheclear.data;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.safermobile.intheclear.ITCConstants;
-import org.safermobile.intheclear.R;
-import org.safermobile.utils.FolderIterator;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.ContentProviderOperation;
@@ -22,7 +10,6 @@ import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.RemoteException;
@@ -31,6 +18,18 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Data;
 import android.provider.MediaStore;
 import android.util.Log;
+
+import org.safermobile.intheclear.ITCConstants;
+import org.safermobile.intheclear.R;
+import org.safermobile.utils.FolderIterator;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class PIMWiper extends Thread {
 	private static ContentResolver cr;

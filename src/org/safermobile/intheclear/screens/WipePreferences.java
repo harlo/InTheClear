@@ -1,10 +1,12 @@
 package org.safermobile.intheclear.screens;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ListView;
 
 import org.safermobile.intheclear.ITCConstants;
 import org.safermobile.intheclear.R;
@@ -12,14 +14,9 @@ import org.safermobile.intheclear.ui.WipeArrayAdaptor;
 import org.safermobile.intheclear.ui.WipeSelector;
 import org.safermobile.intheclear.ui.WipeSelector.Color;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ListView;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WipePreferences extends Activity implements OnClickListener {
 	Button confirmSelection;

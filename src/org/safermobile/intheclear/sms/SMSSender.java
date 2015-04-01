@@ -1,22 +1,17 @@
 package org.safermobile.intheclear.sms;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.safermobile.intheclear.ITCConstants;
-import org.safermobile.intheclear.R;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-
 import android.os.Handler;
 import android.os.Message;
 import android.telephony.SmsManager;
-import android.util.Log;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SMSSender implements SMSTesterConstants {
 	PendingIntent _sentPI, _deliveredPI;

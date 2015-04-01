@@ -1,9 +1,9 @@
 package org.safermobile.intheclear.ui;
 
-import org.safermobile.intheclear.R;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+
+import org.safermobile.intheclear.R;
 
 public class WipeDisplay {
 	String _displayText;

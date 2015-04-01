@@ -1,17 +1,10 @@
 package org.safermobile.utils;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
-
-import org.safermobile.intheclear.ITCConstants;
-import org.safermobile.intheclear.ui.WipeSelector;
-
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
-import android.preference.PreferenceManager;
-import android.util.Log;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class FolderIterator {
 	public static File pathToSDCard;
