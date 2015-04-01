@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+
     <string name="KEY_0">بدون</string>
     <string name="KEY_1">بله</string>
     <string name="KEY_2">خانه</string>
@@ -116,6 +117,7 @@
     <string name="KEY_WIZARD_BACK">پشت</string>
     <string name="KEY_WIZARD_ENABLE">فعال</string>
     <string name="KEY_WIZARD_SEND">ارسال</string>
+
     <string-array name="WIZARD_TEXT">
         <item>اگر در روشن you\'d شامل اطلاعاتی از خودتان در زمانی که فعال است ، شما می توانید به پیکربندی که در حال حاضر.</item>
         <item>در حال حاضر ما مطمئن خواهند شد که تلفن خود را درست تنظیم شده است.</item>
@@ -133,6 +135,7 @@
         <item>پیکربندی پاک! گزینه ها</item>
         <item>فعال کردن پاک! دسترسی به پوشه ها</item>
     </string-array>
+
     <string name="WIZARD_CONFIRMATION_SMSTEST">به نظر می رسد مانند پیام خود را از طریق رفت. لطفا با گیرنده تا مطمئن شویم که.</string>
     <string name="WIZARD_CONFIRMATION_LOCATIONTEST">این داده های مکان ما می تواند access:</string>
     <string name="WIZARD_FAIL_SMSTEST_INVALIDNUMBER">این شماره تلفن معتبر doesn\'t ظاهر می شود. لطفا شماره دیگر را امتحان کنید.</string>
@@ -147,7 +150,7 @@
     <string name="KEY_WIZARD_PHONENUMBERS">شماره تلفن</string>
     <string name="KEY_WIZARD_ALERTMSG">پیام هشدار</string>
     <string name="KEY_WIZARD_CONFIGURE_SHOUT">پیکربندی ابزارهای جستوجو ابزارهای وب و</string>
-<string name="app_name">InTheClear</string>
+    <string name="app_name">InTheClear</string>
     <string name="KEY_OK">خوب</string>
     <string name="KEY_DETAILS">جزئیات</string>
     <string name="KEY_NONE">هیچ کدام</string>
@@ -168,6 +171,7 @@
     <string name="KEY_WIZARD_TITLE">راه اندازی InTheClear</string>
     <string name="KEY_WIZARD_TESTING_SMS_TITLE">تست اس ام اس اضطراری</string>
     <string name="KEY_WIZARD_PLEASE_WAIT">لطفا صبر کنید...</string>
+
     <string-array name="WIZARD_TITLES">
         <item>راه اندازی InTheClear</item>
         <item>تست اس ام اس اضطراری</item>
@@ -176,6 +180,7 @@
         <item>راه اندازی هراس تک لمسی</item>
         <item>راه اندازی InTheClear کامل</item>
     </string-array>
+
     <string name="WIZARD_YOUR_MOBILE_NUMBER">تلفن همراه #</string>
     <string name="WIZARD_SEND_TEST">ارسال تست</string>
     <string name="WIZARD_CONFIRMATION_SMSTEST_TITLE">انجام شد!</string>
@@ -188,4 +193,5 @@
     <string name="WIZARD_SELECT_DATA_BUTTON">انتخاب داده ها از بین برود</string>
     <string name="WIZARD_ONE_TOUCH_PANIC_DESCRIPTION">وقتی هراس های تک لمسی فعال است ، من بی درنگ به تایید قبل از اجرای.</string>
     <string name="WIZARD_ONE_TOUCH_HOMESCREEN_DESCRIPTION">بله ، ایجاد یک میانبر صفحه اصلی هراس برای تک لمسی.</string>
+
 </resources>

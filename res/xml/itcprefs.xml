@@ -1,47 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<PreferenceCategory android:title="@string/KEY_PREF_LANGUAGE_TITLE">
-			<ListPreference android:title="@string/KEY_PREF_LANGUAGE_TITLE"
-			android:summary="@string/KEY_PREF_LANGUAGE_SUMMARY"
-			android:key="DefaultLanguage"
-			android:entries="@array/languages"
-			android:entryValues="@array/languages_values" />
-	</PreferenceCategory>
-	<PreferenceCategory android:title="@string/KEY_PREF_CONFIG_PANIC_TITLE">
-		<EditTextPreference
-			android:title="@string/KEY_PREF_ENTERPHONES_TITLE"
-			android:key="ConfiguredFriends"
-			android:summary="@string/KEY_PREF_ENTERPHONES" />
-		<EditTextPreference
-			android:title="@string/KEY_PREF_ENTERPANICMSG_TITLE"
-			android:key="DefaultPanicMsg"
-			android:summary="@string/KEY_PREF_ENTERPANICMSG" />
-		<CheckBoxPreference
-			android:title="@string/KEY_PREF_ONETOUCH"
-			android:summary="@string/KEY_PREF_ONETOUCH_DIALOG"
-			android:key="DefaultOneTouchPanic" />
-	</PreferenceCategory>
-	<PreferenceCategory android:title="@string/KEY_PREF_CONFIG_WIPE_TITLE" android:summary="@string/KEY_PREF_WIPEDIALOG" android:key="DefaultWipers">
-		<CheckBoxPreference
-			android:title="@string/KEY_PREF_WIPECONTACTS"
-			android:key="DefaultWipeContacts" />
-		<CheckBoxPreference
-			android:title="@string/KEY_PREF_WIPEPHOTOS"
-			android:key="DefaultWipePhotos" />
-		<CheckBoxPreference
-			android:title="@string/KEY_PREF_WIPECALLLOG"
-			android:key="DefaultWipeCallLog" />
-		<CheckBoxPreference
-			android:title="@string/KEY_PREF_WIPESMS"
-			android:key="DefaultWipeSMS" />
-		<CheckBoxPreference
-			android:title="@string/KEY_PREF_WIPECALENDAR"
-			android:key="DefaultWipeCalendar" />
-		<CheckBoxPreference
-			android:title="@string/KEY_PREF_WIPEFILES"
-			android:key="DefaultWipeFolders" />
-		<CheckBoxPreference
-			android:key="IsVirginUser"
-			android:defaultValue="false" />
-	</PreferenceCategory>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/KEY_PREF_LANGUAGE_TITLE" >
+        <ListPreference
+            android:entries="@array/languages"
+            android:entryValues="@array/languages_values"
+            android:key="DefaultLanguage"
+            android:summary="@string/KEY_PREF_LANGUAGE_SUMMARY"
+            android:title="@string/KEY_PREF_LANGUAGE_TITLE" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/KEY_PREF_CONFIG_PANIC_TITLE" >
+        <EditTextPreference
+            android:key="ConfiguredFriends"
+            android:summary="@string/KEY_PREF_ENTERPHONES"
+            android:title="@string/KEY_PREF_ENTERPHONES_TITLE" />
+        <EditTextPreference
+            android:key="DefaultPanicMsg"
+            android:summary="@string/KEY_PREF_ENTERPANICMSG"
+            android:title="@string/KEY_PREF_ENTERPANICMSG_TITLE" />
+
+        <CheckBoxPreference
+            android:key="DefaultOneTouchPanic"
+            android:summary="@string/KEY_PREF_ONETOUCH_DIALOG"
+            android:title="@string/KEY_PREF_ONETOUCH" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="DefaultWipers"
+        android:summary="@string/KEY_PREF_WIPEDIALOG"
+        android:title="@string/KEY_PREF_CONFIG_WIPE_TITLE" >
+        <CheckBoxPreference
+            android:key="DefaultWipeContacts"
+            android:title="@string/KEY_PREF_WIPECONTACTS" />
+        <CheckBoxPreference
+            android:key="DefaultWipePhotos"
+            android:title="@string/KEY_PREF_WIPEPHOTOS" />
+        <CheckBoxPreference
+            android:key="DefaultWipeCallLog"
+            android:title="@string/KEY_PREF_WIPECALLLOG" />
+        <CheckBoxPreference
+            android:key="DefaultWipeSMS"
+            android:title="@string/KEY_PREF_WIPESMS" />
+        <CheckBoxPreference
+            android:key="DefaultWipeCalendar"
+            android:title="@string/KEY_PREF_WIPECALENDAR" />
+        <CheckBoxPreference
+            android:key="DefaultWipeFolders"
+            android:title="@string/KEY_PREF_WIPEFILES" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="IsVirginUser" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

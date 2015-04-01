@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+
     <string name="KEY_0">لا</string>
     <string name="KEY_1">نعم</string>
     <string name="KEY_2">منزل</string>
@@ -116,6 +117,7 @@
     <string name="KEY_WIZARD_BACK">ظهر</string>
     <string name="KEY_WIZARD_ENABLE">تمكين</string>
     <string name="KEY_WIZARD_SEND">إرسال</string>
+
     <string-array name="WIZARD_TEXT">
         <item>إذا كان مثل you\'d وفي مسح لتشمل معلومات عن نفسك عند تفعيلها ، يمكنك تكوين ذلك الآن.</item>
         <item>الآن سوف نقوم تأكد من تكوين الهاتف بشكل صحيح.</item>
@@ -133,6 +135,7 @@
         <item>امسح تكوين! خيارات</item>
         <item>تمكين مسح! الوصول إلى مجلدات</item>
     </string-array>
+
     <string name="WIZARD_CONFIRMATION_SMSTEST">يبدو أن الرسالة مرت. يرجى التحقق مع المتلقي للتأكد.</string>
     <string name="WIZARD_CONFIRMATION_LOCATIONTEST">هذه هي بيانات الموقع يمكننا access:</string>
     <string name="WIZARD_FAIL_SMSTEST_INVALIDNUMBER">doesn\'t رقم الهاتف هذا يبدو صحيحا. الرجاء حاول عدد آخر.</string>
@@ -147,7 +150,7 @@
     <string name="KEY_WIZARD_PHONENUMBERS">أرقام الهاتف</string>
     <string name="KEY_WIZARD_ALERTMSG">رسالة تنبيه</string>
     <string name="KEY_WIZARD_CONFIGURE_SHOUT">تكوين تنبيهات</string>
-<string name="app_name">InTheClear</string>
+    <string name="app_name">InTheClear</string>
     <string name="KEY_OK">موافق</string>
     <string name="KEY_DETAILS">تفاصيل</string>
     <string name="KEY_NONE">لا شيء</string>
@@ -168,6 +171,7 @@
     <string name="KEY_WIZARD_TITLE">InTheClear الإعداد</string>
     <string name="KEY_WIZARD_TESTING_SMS_TITLE">اختبار SMS الطوارئ</string>
     <string name="KEY_WIZARD_PLEASE_WAIT">الرجاء الانتظار...</string>
+
     <string-array name="WIZARD_TITLES">
         <item>InTheClear الإعداد</item>
         <item>اختبار SMS الطوارئ</item>
@@ -176,6 +180,7 @@
         <item>لمسة واحدة الذعر الإعداد</item>
         <item>InTheClear اكتمال الإعداد</item>
     </string-array>
+
     <string name="WIZARD_YOUR_MOBILE_NUMBER"># المحمول الخاص</string>
     <string name="WIZARD_SEND_TEST">ارسال اختبار</string>
     <string name="WIZARD_CONFIRMATION_SMSTEST_TITLE">النجاح!</string>
@@ -188,4 +193,5 @@
     <string name="WIZARD_SELECT_DATA_BUTTON">حدد لمحو البيانات</string>
     <string name="WIZARD_ONE_TOUCH_PANIC_DESCRIPTION">عندما يتم تنشيط بلمسة واحدة الذعر وعدم المطالبة لي لتأكيد قبل تشغيل.</string>
     <string name="WIZARD_ONE_TOUCH_HOMESCREEN_DESCRIPTION">نعم ، إنشاء اختصار الشاشة الرئيسية لبلمسة واحدة الذعر.</string>
+
 </resources>

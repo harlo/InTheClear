@@ -1,72 +1,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:weightSum="1.0"
-    android:background="#ffffff" >
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="fill_parent"
-	  	android:layout_height="0dip"
-	 	android:layout_weight="0.15"
-	 	android:weightSum="1.0"
-	  	android:orientation="horizontal">
-  		<ImageView
-  			android:layout_width="0dip"
-  			android:layout_height="wrap_content"
-  			android:layout_weight="0.25"
-  			android:layout_marginLeft="20dip"
-  			android:layout_marginRight="20dip"
-  			android:src="@drawable/sm3cropped" />
-  		<TextView 
-  			android:layout_width="0dip"
-  			android:layout_height="wrap_content"
-  			android:layout_weight="0.75"
-  			android:textSize="26dip"
-  			android:textColor="#ff000000"
-  			android:text="@string/KEY_PANIC_TITLE"
-  			android:id="@+id/panicTitle" />
-  	</LinearLayout>
-  	<ScrollView 
-  		xmlns:android="http://schemas.android.com/apk/res/android"
-  		android:layout_width="fill_parent"
-  		android:layout_height="0dip"
-  		android:layout_weight="0.7" >
-  		
-  	  	<LinearLayout
-	  		xmlns:android="http://schemas.android.com/apk/res/android"
-	  		android:layout_width="fill_parent"
-	  		android:layout_height="wrap_content"
-	  		android:orientation="vertical"
-	  		android:id="@+id/panicMsgHolder"
-	  		android:padding="10dip" >
-	  		<TextView 
-	  			android:layout_width="fill_parent"
-	  			android:layout_height="wrap_content"
-	  			android:textSize="20dip"
-	  			android:textColor="#000000"
-	  			android:text="@string/KEY_PANIC_MSG_TITLE" />
-	  		<TextView
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:textColor="#000000"
-				android:id="@+id/panicReadout" />
-			<TextView
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:textColor="#000000"
-				android:textSize="20dip"
-				android:layout_marginBottom="20dip"
-				android:layout_marginTop="20dip"
-				android:text="@string/KEY_PANIC_WIPE_TITLE" />
-			<ListView
-				android:layout_height="200dip"
-				android:layout_width="fill_parent"
-				android:id="@+id/wipeDisplayList"  />
-	  	</LinearLayout>
-  	</ScrollView>
-	<Button
-		android:layout_width="fill_parent"
-		android:layout_height="0dip"
-		android:layout_weight="0.15"
-		android:id="@+id/panicControl" />
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:weightSum="1.0" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.15"
+        android:orientation="horizontal"
+        android:weightSum="1.0" >
+
+        <ImageView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:layout_weight="0.25"
+            android:src="@drawable/sm3cropped" />
+
+        <TextView
+            android:id="@+id/panicTitle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="@string/KEY_PANIC_TITLE"
+            android:textColor="#ff000000"
+            android:textSize="26dip" />
+    </LinearLayout>
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.7" >
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/panicMsgHolder"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/KEY_PANIC_MSG_TITLE"
+                android:textColor="#000000"
+                android:textSize="20dip" />
+
+            <TextView
+                android:id="@+id/panicReadout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:layout_marginTop="20dip"
+                android:text="@string/KEY_PANIC_WIPE_TITLE"
+                android:textColor="#000000"
+                android:textSize="20dip" />
+
+            <ListView
+                android:id="@+id/wipeDisplayList"
+                android:layout_width="fill_parent"
+                android:layout_height="200dip" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/panicControl"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.15" />
+
 </LinearLayout>
