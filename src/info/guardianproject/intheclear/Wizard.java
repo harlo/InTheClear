@@ -113,7 +113,7 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
         l.addView(failures);
 
         TextView email = new TextView(this);
-        email.setText(getResources().getString(R.string.SAFERMOBILE_EMAIL));
+        email.setText(getResources().getString(R.string.support_email_address));
         Linkify.addLinks(email, Linkify.EMAIL_ADDRESSES);
         l.addView(email);
 
