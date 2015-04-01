@@ -1,3 +1,4 @@
+
 package org.safermobile.intheclear.controllers;
 
 import android.app.Service;
@@ -14,40 +15,39 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class WipeController extends Service {
-	boolean callbackAttached = false;
-	String callbackClass;
-	Context _c;
-	Timer t;
-	TimerTask tt;
-	
-	public class LocalBinder extends Binder {
-		public WipeController getService() {
-			return WipeController.this;
-		}
-	}
-	
-	private final IBinder binder = new LocalBinder();
-	
-	public void addCallbackTo(String callbackClass) {
-		this.callbackClass = callbackClass;
-		this.callbackAttached = true;
-	}
-	
-	public void wipePIMData(Context c, boolean contacts, boolean photos, boolean callLog, boolean sms, boolean calendar, boolean sdcard) {
-		new PIMWiper(getBaseContext(),contacts, photos, callLog, sms, calendar,sdcard).start();
+    boolean callbackAttached = false;
+    String callbackClass;
+    Context _c;
+    Timer t;
+    TimerTask tt;
 
-		
-		// kill the calling activity
-		Intent toKill = new Intent();
-		Log.d(ITCConstants.Log.ITC,"the kill filter is called: " + c.getClass().toString());
-		toKill.setAction(c.getClass().toString());
-		getBaseContext().sendBroadcast(toKill);
-		
-			
-	}
-	
-	@Override
-	public IBinder onBind(Intent i) {
-		return binder;
-	}
+    public class LocalBinder extends Binder {
+        public WipeController getService() {
+            return WipeController.this;
+        }
+    }
+
+    private final IBinder binder = new LocalBinder();
+
+    public void addCallbackTo(String callbackClass) {
+        this.callbackClass = callbackClass;
+        this.callbackAttached = true;
+    }
+
+    public void wipePIMData(Context c, boolean contacts, boolean photos, boolean callLog,
+            boolean sms, boolean calendar, boolean sdcard) {
+        new PIMWiper(getBaseContext(), contacts, photos, callLog, sms, calendar, sdcard).start();
+
+        // kill the calling activity
+        Intent toKill = new Intent();
+        Log.d(ITCConstants.Log.ITC, "the kill filter is called: " + c.getClass().toString());
+        toKill.setAction(c.getClass().toString());
+        getBaseContext().sendBroadcast(toKill);
+
+    }
+
+    @Override
+    public IBinder onBind(Intent i) {
+        return binder;
+    }
 }

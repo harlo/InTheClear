@@ -1,5 +1,5 @@
-package org.safermobile.intheclear;
 
+package org.safermobile.intheclear;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -15,37 +15,39 @@ import android.util.Log;
 import java.util.Locale;
 
 public class ITCPreferences extends PreferenceActivity implements OnPreferenceChangeListener {
-	PreferenceCategory pc;
-	ListPreference lang;
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.itcprefs);
-		
-		pc = (PreferenceCategory) findPreference(ITCConstants.Preference.WIPERCAT);
-		pc.removePreference((CheckBoxPreference) findPreference("IsVirginUser"));
-		
-		lang = (ListPreference) findPreference(ITCConstants.Preference.DEFAULT_LANGUAGE);
-		lang.setOnPreferenceChangeListener(this);		
-	}
-	
-	public void setNewLocale(String localeCode) {
-		Configuration config = new Configuration();
-		config.locale = new Locale(localeCode);
-		getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-		Log.d(ITCConstants.Log.ITC,"current configuration = " + getBaseContext().getResources().getConfiguration().locale);
-		// go to home to "reload" activity properly?
-		startActivity(new Intent(this,InTheClear.class));
-	}
+    PreferenceCategory pc;
+    ListPreference lang;
 
-	@Override
-	public boolean onPreferenceChange(Preference preference, Object obj) {
-		if(preference == lang) {
-			setNewLocale(obj.toString());
-			return true;
-		}
-		return false;
-	}
-	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.itcprefs);
+
+        pc = (PreferenceCategory) findPreference(ITCConstants.Preference.WIPERCAT);
+        pc.removePreference((CheckBoxPreference) findPreference("IsVirginUser"));
+
+        lang = (ListPreference) findPreference(ITCConstants.Preference.DEFAULT_LANGUAGE);
+        lang.setOnPreferenceChangeListener(this);
+    }
+
+    public void setNewLocale(String localeCode) {
+        Configuration config = new Configuration();
+        config.locale = new Locale(localeCode);
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+        Log.d(ITCConstants.Log.ITC, "current configuration = "
+                + getBaseContext().getResources().getConfiguration().locale);
+        // go to home to "reload" activity properly?
+        startActivity(new Intent(this, InTheClear.class));
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object obj) {
+        if (preference == lang) {
+            setNewLocale(obj.toString());
+            return true;
+        }
+        return false;
+    }
+
 }

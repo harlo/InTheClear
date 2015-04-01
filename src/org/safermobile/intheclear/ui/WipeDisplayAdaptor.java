@@ -1,3 +1,4 @@
+
 package org.safermobile.intheclear.ui;
 
 import android.content.Context;
@@ -13,39 +14,39 @@ import org.safermobile.intheclear.R;
 import java.util.ArrayList;
 
 public class WipeDisplayAdaptor extends BaseAdapter {
-	private ArrayList<WipeDisplay> _wipeDisplay;
-	LayoutInflater li;
-	
-	public WipeDisplayAdaptor(Context c, ArrayList<WipeDisplay> wipeDisplay) {
-		_wipeDisplay = wipeDisplay;
-		li = LayoutInflater.from(c);
-	}
-	
-	@Override
-	public int getCount() {
-		return _wipeDisplay.size();
-	}
+    private ArrayList<WipeDisplay> _wipeDisplay;
+    LayoutInflater li;
 
-	@Override
-	public Object getItem(int i) {
-		return null;
-	}
+    public WipeDisplayAdaptor(Context c, ArrayList<WipeDisplay> wipeDisplay) {
+        _wipeDisplay = wipeDisplay;
+        li = LayoutInflater.from(c);
+    }
 
-	@Override
-	public long getItemId(int i) {
-		return 0;
-	}
+    @Override
+    public int getCount() {
+        return _wipeDisplay.size();
+    }
 
-	@Override
-	public View getView(final int position, View compositeView, ViewGroup parent) {
-		compositeView = li.inflate(R.layout.wipe_display, null);
-		ImageView selectionIcon = (ImageView) compositeView.findViewById(R.id.selectionIcon);
-		TextView selectionText = (TextView) compositeView.findViewById(R.id.selectionText);
-		
-		selectionIcon.setBackgroundDrawable(_wipeDisplay.get(position)._displayIcon);
-		selectionText.setText(_wipeDisplay.get(position)._displayText);
-		
-		return compositeView;
-	}
+    @Override
+    public Object getItem(int i) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return 0;
+    }
+
+    @Override
+    public View getView(final int position, View compositeView, ViewGroup parent) {
+        compositeView = li.inflate(R.layout.wipe_display, null);
+        ImageView selectionIcon = (ImageView) compositeView.findViewById(R.id.selectionIcon);
+        TextView selectionText = (TextView) compositeView.findViewById(R.id.selectionText);
+
+        selectionIcon.setBackgroundDrawable(_wipeDisplay.get(position)._displayIcon);
+        selectionText.setText(_wipeDisplay.get(position)._displayText);
+
+        return compositeView;
+    }
 
 }
