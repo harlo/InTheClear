@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.safermobile.intheclear"
+    package="info.guardianproject.intheclear"
     android:versionCode="1"
     android:versionName="1.1" >
 
@@ -113,7 +113,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name="org.safermobile.utils.EndActivity" >
+        <activity android:name="info.guardianproject.utils.EndActivity" >
             <intent-filter>
                 <action android:name="org.safermobile.utils.EndActivity" />
             </intent-filter>
