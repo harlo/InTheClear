@@ -21,7 +21,7 @@ public class ITCPreferences extends PreferenceActivity implements OnPreferenceCh
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.itcprefs);
+        addPreferencesFromResource(R.xml.preferences);
 
         pc = (PreferenceCategory) findPreference(ITCConstants.Preference.WIPERCAT);
         pc.removePreference((CheckBoxPreference) findPreference("IsVirginUser"));
