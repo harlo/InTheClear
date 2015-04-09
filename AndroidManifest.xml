@@ -36,7 +36,6 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name=".InTheClear" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -52,10 +51,6 @@
             android:taskAffinity=".Wizard"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden" >
-            <intent-filter>
-                <action android:name=".Wizard" />
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".screens.WipePreferences"
@@ -63,10 +58,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.CustomDialog"
             android:windowSoftInputMode="stateHidden" >
-            <intent-filter>
-                <action android:name=".screens.WipePreferences" />
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
         <activity android:name=".ITCPreferences" >
         </activity>
@@ -81,7 +72,6 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
-                <action android:name=".apps.Panic" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -95,10 +85,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden" >
-            <intent-filter>
-                <action android:name=".apps.Shout" />
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".apps.Wipe"
@@ -108,16 +94,8 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden" >
-            <intent-filter>
-                <action android:name=".apps.Wipe" />
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
-        <activity android:name="info.guardianproject.utils.EndActivity" >
-            <intent-filter>
-                <action android:name="org.safermobile.utils.EndActivity" />
-            </intent-filter>
-        </activity>
+        <activity android:name="info.guardianproject.utils.EndActivity" />
 
         <service
             android:name=".controllers.PanicController"
@@ -126,7 +104,6 @@
             android:name=".controllers.WipeController"
             android:enabled="true" />
 
-        <receiver android:name=".sms.SMSConfirm" />
     </application>
 
 </manifest>
