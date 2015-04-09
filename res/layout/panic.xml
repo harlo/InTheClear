@@ -6,7 +6,6 @@
     android:weightSum="1.0" >
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.15"
@@ -32,13 +31,11 @@
     </LinearLayout>
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.7" >
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/panicMsgHolder"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

@@ -6,7 +6,6 @@
     android:weightSum="1.0" >
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.15"
@@ -33,7 +32,6 @@
     </LinearLayout>
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/panicMsgHolder"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
@@ -49,7 +47,6 @@
             android:textColor="#ff000000" />
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -63,7 +60,6 @@
                 android:layout_weight="0.3"
                 android:text="@string/KEY_EMERGENCY_SMS_RECIPIENT_MOBILE"
                 android:textColor="#ff000000" />
-"
 
             <EditText
                 android:id="@+id/configuredFriendsText"
@@ -73,7 +69,6 @@
         </LinearLayout>
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -87,7 +82,6 @@
                 android:layout_weight="0.3"
                 android:text="@string/KEY_EMERGENCY_SMS_EMERGENCY_MSG"
                 android:textColor="#ff000000" />
-"
 
             <EditText
                 android:id="@+id/panicMessageText"
