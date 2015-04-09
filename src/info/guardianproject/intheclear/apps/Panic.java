@@ -67,6 +67,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
             Log.d(ITCConstants.Log.ITC, "i bound the service");
         }
 
+        @Override
         public void onServiceDisconnected(ComponentName cn) {
             pc = null;
         }
@@ -151,7 +152,6 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
         }
     }
 
-    @SuppressWarnings("static-access")
     @Override
     public void onNewIntent(Intent i) {
         super.onNewIntent(i);
@@ -191,6 +191,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
                     .setCancelable(false)
                     .setPositiveButton(getResources().getString(R.string.KEY_OK),
                             new DialogInterface.OnClickListener() {
+                                @Override
                                 public void onClick(DialogInterface dialog, int id) {
                                     Panic.this.launchPreferences();
                                 }
@@ -266,7 +267,6 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
                 ITCConstants.Duriation.COUNTDOWNINTERVAL) {
             int t = 5;
 
-            @SuppressWarnings("static-access")
             @Override
             public void onFinish() {
                 // start the panic

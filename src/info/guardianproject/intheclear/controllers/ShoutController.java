@@ -12,7 +12,6 @@ import info.guardianproject.intheclear.data.MovementTracker;
 import info.guardianproject.intheclear.data.PhoneInfo;
 import info.guardianproject.intheclear.sms.SMSSender;
 
-
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -22,8 +21,6 @@ public class ShoutController {
     SMSSender sms;
     MovementTracker mt;
     Handler h;
-
-    private final static String ITC = "[InTheClear:ShoutController] ************************ ";
 
     public ShoutController(Context c) {
         h = new Handler() {

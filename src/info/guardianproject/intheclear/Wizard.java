@@ -36,7 +36,6 @@ import info.guardianproject.intheclear.screens.WipePreferences;
 import info.guardianproject.intheclear.sms.SMSSender;
 import info.guardianproject.intheclear.sms.SMSTesterConstants;
 
-
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -55,7 +54,6 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
     public ProgressDialog pd;
     public Dialog rd;
 
-    boolean nextButtonClickable, backButtonClickable;
     int[] statusColors;
 
     @Override
@@ -592,18 +590,6 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
                 dismissConfirmation.setWidth((int) (_screen[0] * 0.5));
                 confirmationHolder.addView(details);
                 confirmationHolder.addView(dismissConfirmation);
-
-                /*
-                 * TODO: handle this better. TextView titleHolder = (TextView)
-                 * findViewById(R.id.wizardTitle);
-                 * titleHolder.setText(c.getResources
-                 * ().getString(R.string.WIZARD_CONFIRMATION_SMSTEST_FAIL));
-                 * confirmationText = new TextView(c);
-                 * confirmationText.setText(R.string.WIZARD_SMS_TEST_FAILURES);
-                 * TextView supportEmail = new TextView(c);
-                 * supportEmail.setText(R.string.SAFERMOBILE_EMAIL);
-                 * supportEmail.setAutoLinkMask(Linkify.EMAIL_ADDRESSES);
-                 */
             }
             rd.show();
         }
@@ -624,7 +610,7 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
             // so UI will update according to SMSSender results
             SMSSender sms = new SMSSender(c, new Handler() {
 
-                @SuppressWarnings("unchecked")
+                @Override
                 public void handleMessage(Message message) {
                     pd.dismiss();
                     displayTestSMSResults(message);
