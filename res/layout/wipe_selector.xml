@@ -12,8 +12,8 @@
         android:layout_gravity="center"
         android:layout_weight="0.1"
         android:background="@color/maPink"
-        android:paddingBottom="0px"
-        android:paddingLeft="10px"
+        android:paddingBottom="0dp"
+        android:paddingLeft="10dp"
         android:text="@string/KEY_WIPE_SETTINGS_TITLE"
         android:textColor="#ffffffff"
         android:textStyle="bold" />

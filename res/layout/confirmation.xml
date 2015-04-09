@@ -12,7 +12,7 @@
         android:layout_height="0dip"
         android:layout_weight="0.2"
         android:gravity="center"
-        android:textSize="30dip" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/confirmationText"

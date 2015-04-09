@@ -27,7 +27,7 @@
             android:layout_weight="0.75"
             android:text="@string/KEY_PANIC_TITLE"
             android:textColor="#ff000000"
-            android:textSize="26dip" />
+            android:textSize="26sp" />
     </LinearLayout>
 
     <ScrollView
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/KEY_PANIC_MSG_TITLE"
                 android:textColor="#000000"
-                android:textSize="20dip" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/panicReadout"
@@ -62,7 +62,7 @@
                 android:layout_marginTop="20dip"
                 android:text="@string/KEY_PANIC_WIPE_TITLE"
                 android:textColor="#000000"
-                android:textSize="20dip" />
+                android:textSize="20sp" />
 
             <ListView
                 android:id="@+id/wipeDisplayList"

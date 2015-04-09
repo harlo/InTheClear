@@ -29,7 +29,7 @@
             android:layout_weight="0.75"
             android:text="@string/KEY_WIPE_ACTIVITY_TITLE"
             android:textColor="#ff000000"
-            android:textSize="26dip" />
+            android:textSize="26sp" />
     </LinearLayout>
 
     <LinearLayout
