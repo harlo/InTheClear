@@ -372,7 +372,6 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
 
                     EditText yourNumberTxt = new EditText(c);
                     yourNumberTxt.setWidth((int) (_screen[0] * 0.6));
-                    yourNumberTxt.setId(R.string.yourNumberStatic);
                     ynHolder.addView(yourNumberTxt);
 
                     views.add(ynHolder);
@@ -407,7 +406,6 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
                     recipientNumbers
                             .setContentDescription(ITCConstants.Preference.CONFIGURED_FRIENDS);
                     recipientNumbers.setWidth((int) (_screen[0] * 0.6));
-                    recipientNumbers.setId(R.string.configuredFriendsStatic);
                     recipientNumbers.setOnFocusChangeListener(editTextFocusChangeListener);
                     rnHolder.addView(recipientNumbers);
                     views.add(rnHolder);
@@ -433,7 +431,6 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
                     emergencyMessage.setWidth((int) (_screen[0] * 0.6));
                     emergencyMessage.setHeight((int) (_screen[1] * 0.25));
                     // emergencyMessage.setPadding(10, 5, 5, 7);
-                    emergencyMessage.setId(R.string.defaultPanicMessageStatic);
                     emergencyMessage.setOnFocusChangeListener(editTextFocusChangeListener);
                     emergencyMessage.setOnKeyListener(new OnKeyListener() {
 
