@@ -3,6 +3,6 @@
 
     <item
         android:id="@+id/toHome"
-        android:title="@string/KEY_2"/>
+        android:title="@string/home"/>
 
 </menu>
