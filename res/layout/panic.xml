@@ -43,6 +43,7 @@
             android:padding="10dip" >
 
             <TextView
+                android:id="@+id/shoutReadoutTitle"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/KEY_PANIC_MSG_TITLE"
@@ -50,7 +51,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/panicReadout"
+                android:id="@+id/shoutReadout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000" />

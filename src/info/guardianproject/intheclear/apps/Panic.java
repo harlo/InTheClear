@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,16 +31,16 @@ import info.guardianproject.intheclear.ITCPreferences;
 import info.guardianproject.intheclear.R;
 import info.guardianproject.intheclear.controllers.PanicController;
 import info.guardianproject.intheclear.controllers.PanicController.LocalBinder;
+import info.guardianproject.intheclear.data.PhoneInfo;
 import info.guardianproject.intheclear.ui.WipeDisplayAdaptor;
 import info.guardianproject.utils.EndActivity;
-
 
 public class Panic extends Activity implements OnClickListener, OnDismissListener {
 
     SharedPreferences _sp;
     boolean oneTouchPanic;
 
-    TextView panicReadout, panicProgress, countdownReadout;
+    TextView shoutReadout, panicProgress, countdownReadout;
     ListView wipeDisplayList;
     Button controlPanic, cancelCountdown, panicControl;
 
@@ -61,7 +62,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
             LocalBinder lb = (PanicController.LocalBinder) binder;
             pc = lb.getService();
             isBound = true;
-            panicReadout.setText(pc.returnPanicData());
+            shoutReadout.setText(pc.returnPanicData());
             wipeDisplayList.setAdapter(new WipeDisplayAdaptor(Panic.this, pc.returnWipeSettings()));
 
             Log.d(ITCConstants.Log.ITC, "i bound the service");
@@ -92,8 +93,15 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
 
         _sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-        panicReadout = (TextView) findViewById(R.id.panicReadout);
         panicControl = (Button) findViewById(R.id.panicControl);
+        shoutReadout = (TextView) findViewById(R.id.shoutReadout);
+
+        // if this is not a cell phone, then no need to show the panic message
+        if (TextUtils.isEmpty(PhoneInfo.getIMEI())) {
+            shoutReadout.setVisibility(View.GONE);
+            TextView shoutReadoutTitle = (TextView) findViewById(R.id.shoutReadoutTitle);
+            shoutReadoutTitle.setVisibility(View.GONE);
+        }
 
         wipeDisplayList = (ListView) findViewById(R.id.wipeDisplayList);
 

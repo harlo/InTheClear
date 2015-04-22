@@ -11,14 +11,15 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import info.guardianproject.intheclear.ITCConstants;
 import info.guardianproject.intheclear.R;
 import info.guardianproject.intheclear.apps.Panic;
 import info.guardianproject.intheclear.data.PIMWiper;
+import info.guardianproject.intheclear.data.PhoneInfo;
 import info.guardianproject.intheclear.ui.WipeDisplay;
-
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class PanicController extends Service {
     private NotificationManager nm;
     SharedPreferences _sp;
 
-    TimerTask tt, ui;
+    TimerTask shoutTimerTask, ui;
     Timer t = new Timer();
     Timer u = new Timer();
     final Handler h = new Handler();
@@ -60,7 +61,8 @@ public class PanicController extends Service {
     @Override
     public void onCreate() {
         nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        shoutController = new ShoutController(getBaseContext());
+        if (!TextUtils.isEmpty(PhoneInfo.getIMEI()))
+            shoutController = new ShoutController(getBaseContext());
         backToPanic = new Intent(this, Panic.class);
         alignPreferences();
         showNotification();
@@ -73,8 +75,8 @@ public class PanicController extends Service {
         defaultPanicMsg = _sp.getString(ITCConstants.Preference.DEFAULT_PANIC_MSG, "");
         userDisplayName = _sp.getString(ITCConstants.Preference.USER_DISPLAY_NAME, "");
 
-        panicData = "\n\n" + defaultPanicMsg +
-                "\n\n" + shoutController.buildShoutData();
+        if (shoutController != null)
+            panicData = "\n\n" + defaultPanicMsg + "\n\n" + shoutController.buildShoutData();
 
         shouldWipeContacts = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_CONTACTS, false);
         shouldWipePhotos = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_PHOTOS, false);
@@ -133,11 +135,13 @@ public class PanicController extends Service {
     }
 
     private int shout() {
+        if (shoutController == null)
+            return ITCConstants.Results.NOT_AVAILABLE;
         int result = ITCConstants.Results.FAIL;
         setPanicProgress(getString(R.string.KEY_PANIC_PROGRESS_1));
         updatePanicUi(getPanicProgress());
 
-        tt = new TimerTask() {
+        shoutTimerTask = new TimerTask() {
 
             @Override
             public void run() {
@@ -161,7 +165,7 @@ public class PanicController extends Service {
 
         };
 
-        t.schedule(tt, 0, ITCConstants.Duriation.CONTINUED_PANIC);
+        t.schedule(shoutTimerTask, 0, ITCConstants.Duriation.CONTINUED_PANIC);
         result = ITCConstants.Results.A_OK;
         return result;
     }
@@ -184,7 +188,8 @@ public class PanicController extends Service {
 
     private void stopRunnables() {
         if (isPanicing) {
-            tt.cancel();
+            if (shoutTimerTask != null)
+                shoutTimerTask.cancel();
             isPanicing = false;
         }
     }
@@ -196,7 +201,9 @@ public class PanicController extends Service {
 
     public void startPanic() {
         isPanicing = true;
-        if (shout() == ITCConstants.Results.A_OK)
+        int shoutResult = shout();
+        if (shoutResult == ITCConstants.Results.A_OK
+                || shoutResult == ITCConstants.Results.NOT_AVAILABLE)
             if (wipe() == ITCConstants.Results.A_OK) {
                 setPanicProgress(getString(R.string.KEY_PANIC_PROGRESS_3));
                 updatePanicUi(getPanicProgress());

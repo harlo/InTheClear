@@ -37,6 +37,7 @@ public class ITCConstants {
         public static final int SETUP_WIZARD = 2;
         public static final int OVERRIDE_WIPE_PREFERENCES = 3;
         public static final int RETURN_FROM_PANIC = 4;
+        public static final int NOT_AVAILABLE = 5;
         public static final int A_OK = 1;
         public static final int FAIL = -1;
     }

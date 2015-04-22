@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +22,12 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import info.guardianproject.intheclear.apps.Panic;
 import info.guardianproject.intheclear.apps.Shout;
 import info.guardianproject.intheclear.apps.Wipe;
-
+import info.guardianproject.intheclear.data.PhoneInfo;
 
 import java.util.Locale;
 
@@ -89,6 +91,9 @@ public class InTheClear extends Activity implements OnClickListener {
     }
 
     private void launchShout() {
+        if (TextUtils.isEmpty(PhoneInfo.getIMEI())) {
+            Toast.makeText(this, "This device is not a cell phone", Toast.LENGTH_SHORT).show();
+        }
         Intent i = new Intent(this, Shout.class);
         startActivity(i);
     }
