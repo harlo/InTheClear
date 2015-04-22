@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="remote_service_start_id">Remote Service Start Id</string>
     <string name="wizard_form">itcwizardform</string>
     <string name="yourNumberStatic">yourNumberStatic</string>
     <string name="configuredFriendsStatic">Your Configured Friends</string>
     <string name="defaultPanicMessageStatic">The one where the gang sets its default panic message.</string>
-    <string name="support_email_address">support@guardianproject.info</string>
     <string name="app_name">InTheClear</string>
 
     <!-- the strings below used to be in itc_strings.xml and where used on Blackberry and J2ME also -->
