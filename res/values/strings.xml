@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">InTheClear</string>
+    <string name="app_description">InTheClear is designed to keep users safer in difficult situations by using their phone\'s built-in tools. At its core are two main features: Emergency SMS, a panic button that sends out a pre-written text message; and Data Wipe, an erase button so you can instantly delete sensitive information. At installation, InTheClear walks a new user through the process of configuring each of these features. The user can then activate either Emergency SMS or Data Wipe individually, on an ad-hoc basis. In addition, they can simultaneously activate *both* Emergency SMS and Data Wipe via Panic!, a simple, one-touch feature of InTheClear.</string>
 
     <!-- the strings below used to be in itc_strings.xml and where used on Blackberry and J2ME also -->
     <string name="home">Home</string>
