@@ -197,7 +197,7 @@ public class ITCConstants {
     }
 
     public static class Log {
-        public static final String ITC = "[InTheClear] ******************************** ";
+        public static final String ITC = "InTheClear";
     }
 
     public static final String UPDATE_UI = "updateUi";
