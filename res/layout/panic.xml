@@ -76,6 +76,8 @@
         android:id="@+id/panicControl"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.15" />
+        android:layout_weight="0.15"
+        android:textSize="64sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
