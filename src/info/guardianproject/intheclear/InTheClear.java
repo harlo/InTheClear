@@ -67,6 +67,7 @@ public class InTheClear extends Activity implements OnClickListener {
         launchGrid = (GridView) findViewById(R.id.launchGrid);
         launchGrid.setAdapter(new ImageAdapter(this));
         launchGrid.setOnItemClickListener(new OnItemClickListener() {
+            @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 if (position == 0)
                     launchShout();
@@ -143,18 +144,18 @@ public class InTheClear extends Activity implements OnClickListener {
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
-            View MyView = convertView;
+            View gridItem = convertView;
 
             if (convertView == null)
             {
                 // Inflate the layout
                 LayoutInflater li = getLayoutInflater();
-                MyView = li.inflate(R.layout.grid_item, null);
+                gridItem = li.inflate(R.layout.grid_item, null);
 
                 // Add image & text
-                TextView tv = (TextView) MyView.findViewById(R.id.grid_item_text);
-                ImageView iv = (ImageView) MyView.findViewById(R.id.grid_item_image);
-                MyView.setId(position);
+                TextView tv = (TextView) gridItem.findViewById(R.id.grid_item_text);
+                ImageView iv = (ImageView) gridItem.findViewById(R.id.grid_item_image);
+                gridItem.setId(position);
 
                 switch (position) {
                     case 0:
@@ -175,7 +176,7 @@ public class InTheClear extends Activity implements OnClickListener {
                         break;
                 }
             }
-            return MyView;
+            return gridItem;
         }
 
         @Override
