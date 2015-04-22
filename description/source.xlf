@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2">
+  <file datatype="plaintext" original="source.xlf" source-language="en">
+    <header>
+      <note from="developer">Google places strick character limits on the various text fields in Google Play. The title is 30 characters, the short description is 80 characters, and the rest of the strings, which all go together in the description, are limited to 4000 characters.</note>
+    </header>
+    <body>
+      <trans-unit id="title" size-unit="char" maxwidth="30">
+        <source>InTheClear</source>
+        <note from="developer">This is limited by Google to 30 characters</note>
+      </trans-unit>
+      <trans-unit id="shortdescription" size-unit="char" maxwidth="80">
+        <source>a panic button to wipe sensitive data and send an emergency message</source>
+        <note from="developer">This is limited by Google to 80 characters</note>
+      </trans-unit>
+      <trans-unit id="intro">
+        <source>InTheClear is designed to keep users safer in difficult situations by using their phone's built-in tools. At its core are two main features: Emergency SMS, a panic button that sends out a pre-written text message; and Data Wipe, an erase button so you can instantly delete sensitive information. At installation, InTheClear walks a new user through the process of configuring each of these features. The user can then activate either Emergency SMS or Data Wipe individually, on an ad-hoc basis. In addition, they can simultaneously activate *both* Emergency SMS and Data Wipe via Panic!, a simple, one-touch feature of InTheClear.</source>
+      </trans-unit>
+      <trans-unit id="wespeakyourlanguage">
+        <source>★ WE SPEAK YOUR LANGUAGE: InTheClear is available for friends who speak:</source>
+      </trans-unit>
+      <trans-unit id="languagelist" translate="no">
+        <source>العربية, English, español, فارسی, 日本語, Norsk, 中文(简体)</source>
+        <note from="developer">Do not translate the names of the languages, leave them just like this.</note>
+      </trans-unit>
+      <trans-unit id="helptranslate">
+        <source>Don’t see your language? Join us and help translate the app:</source>
+      </trans-unit>
+      <trans-unit id="helptranslateurl" translate="no">
+        <source>https://www.transifex.com/projects/p/intheclear</source>
+        <note from="developer">Do not translate this.</note>
+      </trans-unit>
+      <trans-unit id="learnmore">
+        <source>***Learn More***</source>
+      </trans-unit>
+      <trans-unit id="aboutus">
+        <source>★ ABOUT US: Guardian Project is a group of developers that make secure mobile apps and open-source code for a better tomorrow</source>
+      </trans-unit>
+      <trans-unit id="ourwebsite">
+        <source>★ OUR WEBSITE: https://GuardianProject.info</source>
+      </trans-unit>
+      <trans-unit id="ontwitter">
+        <source>★ ON TWITTER: https://twitter.com/guardianproject</source>
+      </trans-unit>
+      <trans-unit id="freesoftware">
+        <source>★ FREE SOFTWARE: InTheClear is free software. You can take a look at our source code, or contribute to help make InTheClear even better:</source>
+      </trans-unit>
+      <trans-unit id="gitrepo" translate="no">
+        <source>https://github.com/guardianproject/InTheClear</source>
+        <note from="developer">Do not translate this.</note>
+      </trans-unit>
+      <trans-unit id="messageus">
+        <source>★ MESSAGE US: Are we missing your favorite feature? Found an annoying bug? Please tell us! We’d love to hear from you. Send us an email: support@guardianproject.info or find us in our chat room https://guardianproject.info/contact</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
