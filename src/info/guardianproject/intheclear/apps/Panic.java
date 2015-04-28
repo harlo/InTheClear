@@ -30,6 +30,7 @@ import info.guardianproject.intheclear.ITCConstants;
 import info.guardianproject.intheclear.ITCPreferences;
 import info.guardianproject.intheclear.R;
 import info.guardianproject.intheclear.controllers.PanicController;
+import info.guardianproject.intheclear.controllers.ShoutController;
 import info.guardianproject.intheclear.controllers.PanicController.LocalBinder;
 import info.guardianproject.intheclear.data.PhoneInfo;
 import info.guardianproject.intheclear.ui.WipeDisplayAdaptor;
@@ -101,6 +102,10 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
             shoutReadout.setVisibility(View.GONE);
             TextView shoutReadoutTitle = (TextView) findViewById(R.id.shoutReadoutTitle);
             shoutReadoutTitle.setVisibility(View.GONE);
+        } else {
+            String panicMsg = _sp.getString(ITCConstants.Preference.DEFAULT_PANIC_MSG, "");
+            shoutReadout.setText("\n\n" + panicMsg + "\n\n"
+                    + ShoutController.buildShoutData(getResources()));
         }
 
         wipeDisplayList = (ListView) findViewById(R.id.wipeDisplayList);

@@ -37,7 +37,7 @@ public class ShoutController {
         mt = new MovementTracker(c);
     }
 
-    public String buildShoutMessage(String userMessage) {
+    public static String buildShoutMessage(Resources res, String userMessage) {
         StringBuffer sbPanicMsg = new StringBuffer();
         sbPanicMsg
                 .append(res.getString(R.string.KEY_PANIC_MSG_FROM) + ":\n" + userMessage + "\n\n");
@@ -46,7 +46,7 @@ public class ShoutController {
         return sbPanicMsg.toString();
     }
 
-    public String buildShoutData() {
+    public static String buildShoutData(Resources res) {
         String timestamp = new Date().toString();
         StringBuffer sbPanicMsg = new StringBuffer();
         sbPanicMsg.append(res.getString(R.string.KEY_PANIC_MSG_FROM) + ":\n");
@@ -83,8 +83,8 @@ public class ShoutController {
         String recipients = sp.getString("ConfiguredFriends", "");
         String userMessage = sp.getString("DefaultPanicMsg", "");
 
-        String shoutMsg = buildShoutMessage(userMessage);
-        String shoutData = buildShoutData();
+        String shoutMsg = buildShoutMessage(res, userMessage);
+        String shoutData = buildShoutData(res);
 
         sendSMSShout(recipients, shoutMsg, shoutData);
     }

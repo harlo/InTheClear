@@ -24,7 +24,6 @@ import info.guardianproject.intheclear.R;
 import info.guardianproject.intheclear.controllers.ShoutController;
 import info.guardianproject.utils.EndActivity;
 
-
 public class Shout extends Activity implements OnClickListener, OnDismissListener {
     private SharedPreferences _sp;
     SharedPreferences.Editor _ed;
@@ -102,6 +101,7 @@ public class Shout extends Activity implements OnClickListener, OnDismissListene
                     .setCancelable(false)
                     .setPositiveButton(getResources().getString(R.string.KEY_OK),
                             new DialogInterface.OnClickListener() {
+                                @Override
                                 public void onClick(DialogInterface dialog, int id) {
                                     Shout.this.launchPreferences();
                                 }
@@ -134,7 +134,8 @@ public class Shout extends Activity implements OnClickListener, OnDismissListene
             @Override
             public void onFinish() {
                 recipients = configuredFriendsText.getText().toString();
-                sc.sendSMSShout(recipients, panicMsg, sc.buildShoutData());
+                sc.sendSMSShout(recipients, panicMsg,
+                        ShoutController.buildShoutData(getResources()));
                 countdown.dismiss();
                 killActivity();
             }
