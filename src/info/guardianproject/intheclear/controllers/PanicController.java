@@ -1,15 +1,13 @@
 
 package info.guardianproject.intheclear.controllers;
 
+import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Binder;
 import android.os.Handler;
-import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,7 +24,17 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PanicController extends Service {
+public class PanicController extends IntentService {
+    private static final String TAG = "PanicController";
+
+    public static final int PROGRESS = 0;
+
+    public static final String KEY_PROGRESS_MESSAGE = "progress_message";
+
+    public PanicController() {
+        super(TAG);
+    }
+
     private NotificationManager nm;
     SharedPreferences _sp;
 
@@ -44,22 +52,13 @@ public class PanicController extends Service {
 
     ArrayList<File> selectedFolders;
     ArrayList<WipeDisplay> wipeDisplayList;
-    String userDisplayName, defaultPanicMsg, configuredFriends, panicData;
+    String userDisplayName, defaultPanicMsg, configuredFriends;
     boolean shouldWipePhotos, shouldWipeContacts, shouldWipeCallLog, shouldWipeSMS,
             shouldWipeCalendar, shouldWipeFolders;
 
-    public class LocalBinder extends Binder {
-        public PanicController getService() {
-            return PanicController.this;
-        }
-    }
-
-    private final IBinder binder = new LocalBinder();
-
-    String recentState;
-
     @Override
     public void onCreate() {
+        super.onCreate();
         nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (!TextUtils.isEmpty(PhoneInfo.getIMEI()))
             shoutController = new ShoutController(getBaseContext());
@@ -72,7 +71,6 @@ public class PanicController extends Service {
         _sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         selectedFolders = new ArrayList<File>();
-        defaultPanicMsg = _sp.getString(ITCConstants.Preference.DEFAULT_PANIC_MSG, "");
         userDisplayName = _sp.getString(ITCConstants.Preference.USER_DISPLAY_NAME, "");
 
         shouldWipeContacts = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_CONTACTS, false);
@@ -100,20 +98,8 @@ public class PanicController extends Service {
                 shouldWipeFolders, this));
     }
 
-    public String returnPanicData() {
-        return panicData;
-    }
-
     public ArrayList<WipeDisplay> returnWipeSettings() {
         return wipeDisplayList;
-    }
-
-    public void setPanicProgress(String progress) {
-        recentState = progress;
-    }
-
-    public String getPanicProgress() {
-        return recentState;
     }
 
     public void updatePanicUi(String message) {
@@ -135,8 +121,7 @@ public class PanicController extends Service {
         if (shoutController == null)
             return ITCConstants.Results.NOT_AVAILABLE;
         int result = ITCConstants.Results.FAIL;
-        setPanicProgress(getString(R.string.KEY_PANIC_PROGRESS_1));
-        updatePanicUi(getPanicProgress());
+        updatePanicUi(getString(R.string.KEY_PANIC_PROGRESS_1));
 
         shoutTimerTask = new TimerTask() {
 
@@ -169,8 +154,7 @@ public class PanicController extends Service {
 
     private int wipe() {
         int result = ITCConstants.Results.FAIL;
-        setPanicProgress(getString(R.string.KEY_PANIC_PROGRESS_2));
-        updatePanicUi(getPanicProgress());
+        updatePanicUi(getString(R.string.KEY_PANIC_PROGRESS_2));
         new PIMWiper(
                 getBaseContext(),
                 shouldWipeContacts,
@@ -192,18 +176,18 @@ public class PanicController extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent i, int flags, int startId) {
-        return START_STICKY;
-    }
+    protected void onHandleIntent(Intent intent) {
+        Log.i(TAG, "onHandleIntent " + intent);
+        String packageName = intent.getPackage();
+        Log.i(TAG, "getPackage() " + packageName);
+        // TODO use TrustedIntents here to check trust
 
-    public void startPanic() {
         isPanicing = true;
         int shoutResult = shout();
         if (shoutResult == ITCConstants.Results.A_OK
                 || shoutResult == ITCConstants.Results.NOT_AVAILABLE)
             if (wipe() == ITCConstants.Results.A_OK) {
-                setPanicProgress(getString(R.string.KEY_PANIC_PROGRESS_3));
-                updatePanicUi(getPanicProgress());
+                updatePanicUi(getString(R.string.KEY_PANIC_PROGRESS_3));
             } else {
                 Log.d(ITCConstants.Log.ITC, "SOMETHING WAS WRONG WITH WIPE");
             }
@@ -242,14 +226,8 @@ public class PanicController extends Service {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         stopRunnables();
-        Log.d(ITCConstants.Log.ITC, "goodbye service, bye bye!");
         nm.cancel(R.string.remote_service_start_id);
     }
-
-    @Override
-    public IBinder onBind(Intent i) {
-        return binder;
-    }
-
 }

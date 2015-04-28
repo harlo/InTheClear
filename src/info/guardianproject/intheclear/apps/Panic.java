@@ -6,17 +6,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.IBinder;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,9 +30,7 @@ import info.guardianproject.intheclear.ITCPreferences;
 import info.guardianproject.intheclear.R;
 import info.guardianproject.intheclear.controllers.PanicController;
 import info.guardianproject.intheclear.controllers.ShoutController;
-import info.guardianproject.intheclear.controllers.PanicController.LocalBinder;
 import info.guardianproject.intheclear.data.PhoneInfo;
-import info.guardianproject.intheclear.ui.WipeDisplayAdaptor;
 import info.guardianproject.utils.EndActivity;
 
 public class Panic extends Activity implements OnClickListener, OnDismissListener {
@@ -54,29 +51,20 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
     ProgressDialog panicStatus;
     String currentPanicStatus;
 
-    private PanicController pc;
-    boolean isBound = false;
-
-    private ServiceConnection sc = new ServiceConnection() {
+    private ResultReceiver resultReceiver = new ResultReceiver(new Handler()) {
         @Override
-        public void onServiceConnected(ComponentName cn, IBinder binder) {
-            LocalBinder lb = (PanicController.LocalBinder) binder;
-            pc = lb.getService();
-            isBound = true;
-            shoutReadout.setText(pc.returnPanicData());
-            wipeDisplayList.setAdapter(new WipeDisplayAdaptor(Panic.this, pc.returnWipeSettings()));
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            switch (resultCode) {
 
-            Log.d(ITCConstants.Log.ITC, "i bound the service");
+// TODO wipeDisplayList.setAdapter(new WipeDisplayAdaptor(Panic.this, pc.returnWipeSettings()));
+
+                case PanicController.PROGRESS:
+                    updateProgressWindow(resultData.getString(PanicController.KEY_PROGRESS_MESSAGE));
+                    break;
+            }
         }
-
-        @Override
-        public void onServiceDisconnected(ComponentName cn) {
-            pc = null;
-        }
-
     };
 
-    private BroadcastReceiver panicReceiver;
     private BroadcastReceiver killReceiver = new BroadcastReceiver() {
 
         @Override
@@ -110,20 +98,6 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
 
         wipeDisplayList = (ListView) findViewById(R.id.wipeDisplayList);
 
-        bindService(new Intent(Panic.this, PanicController.class), sc, Context.BIND_AUTO_CREATE);
-        panicReceiver = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (intent.hasExtra(ITCConstants.UPDATE_UI)) {
-                    String message = intent.getStringExtra(ITCConstants.UPDATE_UI);
-                    Log.d(ITCConstants.Log.ITC, message);
-                    updateProgressWindow(message);
-                }
-
-            }
-
-        };
         panicStatus = new ProgressDialog(this);
         panicStatus.setButton(
                 getResources().getString(R.string.KEY_PANIC_MENU_CANCEL),
@@ -142,10 +116,6 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
 
     @Override
     public void onResume() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Panic.class.getName());
-        registerReceiver(panicReceiver, filter);
-
         killFilter.addAction(this.getClass().toString());
         registerReceiver(killReceiver, killFilter);
         super.onResume();
@@ -173,9 +143,6 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
         if (i.hasExtra("ReturnFrom") && i.getIntExtra("ReturnFrom", 0) == ITCConstants.Panic.RETURN) {
             // the app is being launched from the notification tray.
 
-            // update UI with the panic controller's status.
-            updateProgressWindow(pc.getPanicProgress());
-
         }
 
         if (i.hasExtra("PanicCount"))
@@ -184,15 +151,8 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
 
     @Override
     public void onPause() {
-        unregisterReceiver(panicReceiver);
         unregisterReceiver(killReceiver);
         super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        unbindPanicService();
-        super.onDestroy();
     }
 
     private void alignPreferences() {
@@ -222,23 +182,10 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
             cd.cancel();
         }
 
-        unbindPanicService();
-
         toKill = new Intent(this, EndActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
         startActivity(toKill);
 
-    }
-
-    private void unbindPanicService() {
-        try {
-            if (isBound)
-                unbindService(sc);
-        } catch (IllegalArgumentException e) {
-            Log.d(ITCConstants.Log.ITC, "service is already unbound.  Finishing.");
-        }
-        panicState = ITCConstants.PanicState.AT_REST;
-        isBound = false;
     }
 
     @Override
@@ -268,8 +215,6 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
 
     public void launchPreferences() {
         Intent toPrefs = new Intent(this, ITCPreferences.class);
-        if (isBound)
-            unbindPanicService();
         startActivity(toPrefs);
     }
 
@@ -283,7 +228,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
             @Override
             public void onFinish() {
                 // start the panic
-                pc.startPanic();
+                startService(new Intent(getApplicationContext(), PanicController.class));
 
                 // kill the activity
                 killActivity();

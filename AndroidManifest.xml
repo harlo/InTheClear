@@ -104,11 +104,16 @@
 
         <service
             android:name=".controllers.PanicController"
-            android:enabled="true" />
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="info.guardianproject.panic.action.TRIGGER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
         <service
             android:name=".controllers.WipeController"
             android:enabled="true" />
-
     </application>
 
 </manifest>
