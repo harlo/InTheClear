@@ -192,6 +192,9 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
                         nextTarget = wNum + 1;
                         break;
                 }
+                // skip the phone config if device is not a phone
+                if (TextUtils.isEmpty(PhoneInfo.getIMEI()) && (nextTarget == 2 || nextTarget == 3))
+                    nextTarget = 4;
                 i.putExtra("wNum", nextTarget);
                 startActivity(i);
             } else {
@@ -211,6 +214,9 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
                         backTarget = wNum - 1;
                         break;
                 }
+                // skip the phone config if device is not a phone
+                if (TextUtils.isEmpty(PhoneInfo.getIMEI()) && (backTarget == 2 || backTarget == 3))
+                    backTarget = 1;
                 i.putExtra("wNum", backTarget);
                 startActivity(i);
             } else if (wNum == 1) {
