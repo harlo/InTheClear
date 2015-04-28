@@ -57,15 +57,12 @@
     <string name="KEY_SECONDS">秒内…</string>
     <string name="KEY_SHOUT_COUNTDOWNCANCEL">取消本条紧急消息</string>
     <string name="KEY_WIPE_ACTIVITY_TITLE">数据擦拭</string>
-    <string name="KEY_WIPE_ACTIVITYTEXT">选择您要从手机存储器中擦除的部分。选择\"编辑\"更改擦除项。</string>
     <string name="KEY_WIPE_WIPECONTACTS">擦拭联系人</string>
     <string name="KEY_WIPE_WIPEPHOTOS">擦拭照片</string>
     <string name="KEY_WIPE_CALLLOG">擦拭通话记录</string>
     <string name="KEY_WIPE_SMS">擦拭短信记录</string>
     <string name="KEY_WIPE_CALENDAR">擦拭日历</string>
     <string name="KEY_WIPE_SDCARD">擦拭SD卡</string>
-    <string name="KEY_WIPE_EDIT_WIPE">编辑擦拭</string>
-    <string name="KEY_WIPE_BTN_TITLE">擦拭！</string>
     <string name="KEY_WIPE_CONFIRMSELECT">完成</string>
     <string name="KEY_WIZARD_NEXT">下一步</string>
     <string name="KEY_WIZARD_BACK">返回</string>

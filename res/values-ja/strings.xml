@@ -58,15 +58,12 @@
   <string name="KEY_SECONDS">秒…</string>
   <string name="KEY_SHOUT_COUNTDOWNCANCEL">この緊急 SMS をキャンセル</string>
   <string name="KEY_WIPE_ACTIVITY_TITLE">データ消去</string>
-  <string name="KEY_WIPE_ACTIVITYTEXT">お使いの携帯電話のメモリから消去する部分を、以下で選択してください。消去する対象を変更するには、\"編集\"を選択してください。</string>
   <string name="KEY_WIPE_WIPECONTACTS">連絡先を消去</string>
   <string name="KEY_WIPE_WIPEPHOTOS">写真を消去</string>
   <string name="KEY_WIPE_CALLLOG">通話履歴を消去</string>
   <string name="KEY_WIPE_SMS">SMS 履歴を消去</string>
   <string name="KEY_WIPE_CALENDAR">カレンダーを消去</string>
   <string name="KEY_WIPE_SDCARD">SD カードを消去</string>
-  <string name="KEY_WIPE_EDIT_WIPE">消去を編集</string>
-  <string name="KEY_WIPE_BTN_TITLE">消去!</string>
   <string name="KEY_WIPE_CONFIRMSELECT">完了</string>
   <string name="KEY_WIZARD_NEXT">次へ</string>
   <string name="KEY_WIZARD_BACK">戻る</string>

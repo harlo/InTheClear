@@ -44,38 +44,35 @@
             android:layout_marginBottom="20dip"
             android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip"
-            android:text="@string/KEY_WIPE_ACTIVITYTEXT"
+            android:text="@string/wipe_options"
             android:textColor="#ff000000" />
 
-        <LinearLayout
-            android:id="@+id/wipeDisplayHolder"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+        <ListView
+            android:id="@+id/wipeListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/wipeOptions"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.15"
         android:gravity="bottom"
-        android:orientation="horizontal"
-        android:weightSum="1.0" >
+        android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/overrideWipePreferences"
-            android:layout_width="0dip"
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
-            android:text="@string/KEY_WIPE_EDIT_WIPE" />
+            android:text="@android:string/cancel" />
 
         <Button
-            android:id="@+id/wipeButton"
-            android:layout_width="0dip"
+            android:id="@+id/ok"
+            android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
-            android:text="@string/KEY_WIPE_BTN_TITLE" />
+            android:text="@android:string/ok" />
     </LinearLayout>
 
 </LinearLayout>

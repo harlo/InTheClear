@@ -60,15 +60,13 @@
     <string name="KEY_SECONDS">seconds…</string>
     <string name="KEY_SHOUT_COUNTDOWNCANCEL">Cancel this Emergency SMS</string>
     <string name="KEY_WIPE_ACTIVITY_TITLE">Data Wipe</string>
-    <string name="KEY_WIPE_ACTIVITYTEXT">Select Wipe to erase the following portions of your phone\'s memory.  Choose \"Edit\" to change what\'s erased.</string>
+    <string name="wipe_options">Select which things you want to wipe from your phone\'s memory:</string>
     <string name="KEY_WIPE_WIPECONTACTS">Wipe Contacts</string>
     <string name="KEY_WIPE_WIPEPHOTOS">Wipe Photos</string>
     <string name="KEY_WIPE_CALLLOG">Wipe Call Log</string>
     <string name="KEY_WIPE_SMS">Wipe SMS Log</string>
     <string name="KEY_WIPE_CALENDAR">Wipe Calendar</string>
     <string name="KEY_WIPE_SDCARD">Wipe SD Card</string>
-    <string name="KEY_WIPE_EDIT_WIPE">Edit Wipe</string>
-    <string name="KEY_WIPE_BTN_TITLE">WIPE!</string>
     <string name="KEY_WIPE_CONFIRMSELECT">Done</string>
     <string name="KEY_WIZARD_NEXT">Next</string>
     <string name="KEY_WIZARD_BACK">Back</string>

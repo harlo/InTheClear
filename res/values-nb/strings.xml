@@ -57,15 +57,12 @@ mobil #(s)</string>
   <string name="KEY_SECONDS">sekunder…</string>
   <string name="KEY_SHOUT_COUNTDOWNCANCEL">Avbryt denne nød-SMS-en</string>
   <string name="KEY_WIPE_ACTIVITY_TITLE">Datasletting</string>
-  <string name="KEY_WIPE_ACTIVITYTEXT">Velg sletting av data, for å slette følgende deler av ting som er lagret på telefonminne</string>
   <string name="KEY_WIPE_WIPECONTACTS">Slett kontaktliste</string>
   <string name="KEY_WIPE_WIPEPHOTOS">Slett bilder</string>
   <string name="KEY_WIPE_CALLLOG">Slett anropsliste</string>
   <string name="KEY_WIPE_SMS">Slett SMS-logg</string>
   <string name="KEY_WIPE_CALENDAR">Slett kalender-data</string>
   <string name="KEY_WIPE_SDCARD">Slett innhold på SD-kort</string>
-  <string name="KEY_WIPE_EDIT_WIPE">Rediger slettingvalg</string>
-  <string name="KEY_WIPE_BTN_TITLE">SLETT!</string>
   <string name="KEY_WIPE_CONFIRMSELECT">Ferdig</string>
   <string name="KEY_WIZARD_NEXT">Neste</string>
   <string name="KEY_WIZARD_BACK">Tilabake</string>

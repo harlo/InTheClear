@@ -58,15 +58,12 @@
     <string name="KEY_SECONDS">ثانیه…</string>
     <string name="KEY_SHOUT_COUNTDOWNCANCEL">(منو لغو این فریاد)</string>
     <string name="KEY_WIPE_ACTIVITY_TITLE">داده ها پاک</string>
-    <string name="KEY_WIPE_ACTIVITYTEXT">WARNING: این نیز از داده های واقعی از PHONE.\n\nSelect شما یک یا بیشتر از انواع داده های زیر را برای از بین بردن را حذف کنید.</string>
     <string name="KEY_WIPE_WIPECONTACTS">پاک تماس با ما</string>
     <string name="KEY_WIPE_WIPEPHOTOS">پاک عکسها</string>
     <string name="KEY_WIPE_CALLLOG">پاک دفترچه ثبت تماس</string>
     <string name="KEY_WIPE_SMS">پاک SMS ورود به سیستم</string>
     <string name="KEY_WIPE_CALENDAR">پاک تقویم</string>
     <string name="KEY_WIPE_SDCARD">پاک SD کارت</string>
-    <string name="KEY_WIPE_EDIT_WIPE">ویرایش پاک</string>
-    <string name="KEY_WIPE_BTN_TITLE">پاک!</string>
     <string name="KEY_WIPE_CONFIRMSELECT">انجام شده</string>
     <string name="KEY_WIZARD_NEXT">بعد</string>
     <string name="KEY_WIZARD_BACK">پشت</string>

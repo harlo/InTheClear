@@ -16,8 +16,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,7 +32,8 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import info.guardianproject.intheclear.screens.WipePreferences;
+import info.guardianproject.intheclear.apps.Wipe;
+import info.guardianproject.intheclear.data.PhoneInfo;
 import info.guardianproject.intheclear.sms.SMSSender;
 import info.guardianproject.intheclear.sms.SMSTesterConstants;
 
@@ -122,38 +123,6 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
     @Override
     public void onResume() {
         super.onResume();
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent i) {
-        Log.d(ITCConstants.Log.ITC, "back from activity: " + requestCode);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == ITCConstants.Results.PREFERENCES_UPDATED) {
-                // save these prefs,
-                ArrayList<Map<Integer, Boolean>> wipePreferencesHolder =
-                        (ArrayList<Map<Integer, Boolean>>) i
-                                .getSerializableExtra(ITCConstants.Preference.WIPE_SELECTOR);
-
-                Map<Integer, Boolean> wipePreferences = wipePreferencesHolder.get(0);
-
-                _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_CALENDAR,
-                        wipePreferences.get(ITCConstants.Wipe.CALENDAR)).commit();
-                _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_CALLLOG,
-                        wipePreferences.get(ITCConstants.Wipe.CALLLOG)).commit();
-                _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_CONTACTS,
-                        wipePreferences.get(ITCConstants.Wipe.CONTACTS)).commit();
-                _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_FOLDERS,
-                        wipePreferences.get(ITCConstants.Wipe.SDCARD)).commit();
-                _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_PHOTOS,
-                        wipePreferences.get(ITCConstants.Wipe.PHOTOS)).commit();
-                _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_SMS,
-                        wipePreferences.get(ITCConstants.Wipe.SMS)).commit();
-
-                // un-grey out the next button
-                wizardForward.setEnabled(true);
-            }
-        }
     }
 
     private void populateDefaults(View view) {
@@ -477,9 +446,9 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
 
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Wizard.this, WipePreferences.class);
-                            Wizard.this.startActivityForResult(i,
-                                    ITCConstants.Results.PREFERENCES_UPDATED);
+                            Intent i = new Intent(Wizard.this, Wipe.class);
+                            Wizard.this.startActivity(i);
+                            wizardForward.setEnabled(true);
                         }
                     });
 

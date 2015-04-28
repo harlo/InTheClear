@@ -59,17 +59,12 @@ mobile # (ق)</string>
     <string name="KEY_SECONDS">ثانية…</string>
     <string name="KEY_SHOUT_COUNTDOWNCANCEL">(إلغاء هذه صيحة في القائمة)</string>
     <string name="KEY_WIPE_ACTIVITY_TITLE">مسح البيانات</string>
-    <string name="KEY_WIPE_ACTIVITYTEXT">هل هذا WARNING: إزالة البيانات الفعلية من PHONE.
-
-Select YOUR أنواع البيانات واحد أو أكثر دون أن يمسح.</string>
     <string name="KEY_WIPE_WIPECONTACTS">محو الأسماء</string>
     <string name="KEY_WIPE_WIPEPHOTOS">مسح الصور</string>
     <string name="KEY_WIPE_CALLLOG">مسح سجل المكالمات</string>
     <string name="KEY_WIPE_SMS">يمسح سجل SMS</string>
     <string name="KEY_WIPE_CALENDAR">يمسح التقويم</string>
     <string name="KEY_WIPE_SDCARD">مسح بطاقة SD</string>
-    <string name="KEY_WIPE_EDIT_WIPE">تحرير امسح</string>
-    <string name="KEY_WIPE_BTN_TITLE">يمسح!</string>
     <string name="KEY_WIPE_CONFIRMSELECT">فعل</string>
     <string name="KEY_WIZARD_NEXT">التالي</string>
     <string name="KEY_WIZARD_BACK">ظهر</string>

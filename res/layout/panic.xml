@@ -66,9 +66,9 @@
                 android:textSize="20sp" />
 
             <ListView
-                android:id="@+id/wipeDisplayList"
+                android:id="@+id/wipeItems"
                 android:layout_width="fill_parent"
-                android:layout_height="200dip" />
+                android:layout_height="400dip" />
         </LinearLayout>
     </ScrollView>
 

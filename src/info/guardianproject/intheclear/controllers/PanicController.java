@@ -13,11 +13,11 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import info.guardianproject.intheclear.ITCConstants;
+import info.guardianproject.intheclear.ITCConstants.Preference;
 import info.guardianproject.intheclear.R;
 import info.guardianproject.intheclear.apps.Panic;
 import info.guardianproject.intheclear.data.PIMWiper;
 import info.guardianproject.intheclear.data.PhoneInfo;
-import info.guardianproject.intheclear.ui.WipeDisplay;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,10 +51,7 @@ public class PanicController extends IntentService {
     ShoutController shoutController;
 
     ArrayList<File> selectedFolders;
-    ArrayList<WipeDisplay> wipeDisplayList;
     String userDisplayName, defaultPanicMsg, configuredFriends;
-    boolean shouldWipePhotos, shouldWipeContacts, shouldWipeCallLog, shouldWipeSMS,
-            shouldWipeCalendar, shouldWipeFolders;
 
     @Override
     public void onCreate() {
@@ -72,34 +69,7 @@ public class PanicController extends IntentService {
 
         selectedFolders = new ArrayList<File>();
         userDisplayName = _sp.getString(ITCConstants.Preference.USER_DISPLAY_NAME, "");
-
-        shouldWipeContacts = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_CONTACTS, false);
-        shouldWipePhotos = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_PHOTOS, false);
-        shouldWipeCallLog = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_CALLLOG, false);
-        shouldWipeSMS = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_SMS, false);
-        shouldWipeCalendar = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_CALENDAR, false);
-        shouldWipeFolders = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_FOLDERS, false);
-
         configuredFriends = _sp.getString(ITCConstants.Preference.CONFIGURED_FRIENDS, "");
-
-        wipeDisplayList = new ArrayList<WipeDisplay>();
-
-        wipeDisplayList.add(new WipeDisplay(getResources()
-                .getString(R.string.KEY_WIPE_WIPECONTACTS), shouldWipeContacts, this));
-        wipeDisplayList.add(new WipeDisplay(getResources().getString(R.string.KEY_WIPE_WIPEPHOTOS),
-                shouldWipePhotos, this));
-        wipeDisplayList.add(new WipeDisplay(getResources().getString(R.string.KEY_WIPE_CALLLOG),
-                shouldWipeCallLog, this));
-        wipeDisplayList.add(new WipeDisplay(getResources().getString(R.string.KEY_WIPE_SMS),
-                shouldWipeSMS, this));
-        wipeDisplayList.add(new WipeDisplay(getResources().getString(R.string.KEY_WIPE_CALENDAR),
-                shouldWipeCalendar, this));
-        wipeDisplayList.add(new WipeDisplay(getResources().getString(R.string.KEY_WIPE_SDCARD),
-                shouldWipeFolders, this));
-    }
-
-    public ArrayList<WipeDisplay> returnWipeSettings() {
-        return wipeDisplayList;
     }
 
     public void updatePanicUi(String message) {
@@ -157,12 +127,12 @@ public class PanicController extends IntentService {
         updatePanicUi(getString(R.string.KEY_PANIC_PROGRESS_2));
         new PIMWiper(
                 getBaseContext(),
-                shouldWipeContacts,
-                shouldWipePhotos,
-                shouldWipeCallLog,
-                shouldWipeSMS,
-                shouldWipeCalendar,
-                shouldWipeFolders).start();
+                _sp.getBoolean(Preference.DEFAULT_WIPE_CONTACTS, false),
+                _sp.getBoolean(Preference.DEFAULT_WIPE_PHOTOS, false),
+                _sp.getBoolean(Preference.DEFAULT_WIPE_CALLLOG, false),
+                _sp.getBoolean(Preference.DEFAULT_WIPE_SMS, false),
+                _sp.getBoolean(Preference.DEFAULT_WIPE_CALENDAR, false),
+                _sp.getBoolean(Preference.DEFAULT_WIPE_FOLDERS, false)).start();
         result = ITCConstants.Results.A_OK;
         return result;
     }

@@ -26,20 +26,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import info.guardianproject.intheclear.ITCConstants;
+import info.guardianproject.intheclear.ITCConstants.Preference;
 import info.guardianproject.intheclear.ITCPreferences;
 import info.guardianproject.intheclear.R;
 import info.guardianproject.intheclear.controllers.PanicController;
 import info.guardianproject.intheclear.controllers.ShoutController;
 import info.guardianproject.intheclear.data.PhoneInfo;
+import info.guardianproject.intheclear.ui.WipeItem;
+import info.guardianproject.intheclear.ui.WipeItemAdapter;
 import info.guardianproject.utils.EndActivity;
+
+import java.util.ArrayList;
 
 public class Panic extends Activity implements OnClickListener, OnDismissListener {
 
-    SharedPreferences _sp;
+    SharedPreferences sp;
     boolean oneTouchPanic;
 
+    ListView listView;
     TextView shoutReadout, panicProgress, countdownReadout;
-    ListView wipeDisplayList;
     Button controlPanic, cancelCountdown, panicControl;
 
     Intent panic, toKill;
@@ -55,8 +60,6 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             switch (resultCode) {
-
-// TODO wipeDisplayList.setAdapter(new WipeDisplayAdaptor(Panic.this, pc.returnWipeSettings()));
 
                 case PanicController.PROGRESS:
                     updateProgressWindow(resultData.getString(PanicController.KEY_PROGRESS_MESSAGE));
@@ -80,10 +83,11 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.panic);
 
-        _sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         panicControl = (Button) findViewById(R.id.panicControl);
         shoutReadout = (TextView) findViewById(R.id.shoutReadout);
+        listView = (ListView) findViewById(R.id.wipeItems);
 
         // if this is not a cell phone, then no need to show the panic message
         if (TextUtils.isEmpty(PhoneInfo.getIMEI())) {
@@ -91,12 +95,10 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
             TextView shoutReadoutTitle = (TextView) findViewById(R.id.shoutReadoutTitle);
             shoutReadoutTitle.setVisibility(View.GONE);
         } else {
-            String panicMsg = _sp.getString(ITCConstants.Preference.DEFAULT_PANIC_MSG, "");
+            String panicMsg = sp.getString(ITCConstants.Preference.DEFAULT_PANIC_MSG, "");
             shoutReadout.setText("\n\n" + panicMsg + "\n\n"
                     + ShoutController.buildShoutData(getResources()));
         }
-
-        wipeDisplayList = (ListView) findViewById(R.id.wipeDisplayList);
 
         panicStatus = new ProgressDialog(this);
         panicStatus.setButton(
@@ -116,6 +118,25 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
 
     @Override
     public void onResume() {
+
+        final ArrayList<WipeItem> wipeTasks = new ArrayList<WipeItem>(6);
+        wipeTasks.add(0,
+                new WipeItem(R.string.KEY_WIPE_WIPECONTACTS, sp, Preference.DEFAULT_WIPE_CONTACTS));
+        wipeTasks.add(1,
+                new WipeItem(R.string.KEY_WIPE_WIPEPHOTOS, sp, Preference.DEFAULT_WIPE_PHOTOS));
+        wipeTasks.add(2,
+                new WipeItem(R.string.KEY_WIPE_CALLLOG, sp, Preference.DEFAULT_WIPE_CALLLOG));
+        wipeTasks.add(3,
+                new WipeItem(R.string.KEY_WIPE_SMS, sp, Preference.DEFAULT_WIPE_SMS));
+        wipeTasks.add(4,
+                new WipeItem(R.string.KEY_WIPE_CALENDAR, sp, Preference.DEFAULT_WIPE_CALENDAR));
+        wipeTasks.add(5,
+                new WipeItem(R.string.KEY_WIPE_SDCARD, sp, Preference.DEFAULT_WIPE_FOLDERS));
+
+        listView.setAdapter(new WipeItemAdapter(this, wipeTasks));
+        listView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+        listView.setClickable(false);
+
         killFilter.addAction(this.getClass().toString());
         registerReceiver(killReceiver, killFilter);
         super.onResume();
@@ -157,7 +178,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
 
     private void alignPreferences() {
         oneTouchPanic = false;
-        String recipients = _sp.getString(ITCConstants.Preference.CONFIGURED_FRIENDS, "");
+        String recipients = sp.getString(ITCConstants.Preference.CONFIGURED_FRIENDS, "");
         if (recipients.compareTo("") == 0) {
             AlertDialog.Builder d = new AlertDialog.Builder(this);
             d.setMessage(getResources().getString(R.string.KEY_SHOUT_PREFSFAIL))
@@ -172,7 +193,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
             AlertDialog a = d.create();
             a.show();
         } else {
-            oneTouchPanic = _sp.getBoolean(ITCConstants.Preference.DEFAULT_ONE_TOUCH_PANIC, false);
+            oneTouchPanic = sp.getBoolean(ITCConstants.Preference.DEFAULT_ONE_TOUCH_PANIC, false);
         }
     }
 

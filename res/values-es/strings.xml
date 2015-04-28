@@ -57,15 +57,12 @@ número(s) de móvil/celular</string>
   <string name="KEY_SECONDS">segundos…</string>
   <string name="KEY_SHOUT_COUNTDOWNCANCEL">Cancelar este SMS de emergencia</string>
   <string name="KEY_WIPE_ACTIVITY_TITLE">Barrido de datos</string>
-  <string name="KEY_WIPE_ACTIVITYTEXT">Seleccione Barrer para borrar las siguientes porciones de la memoria de su teléfono. Elija \"Editar\" para cambiar lo que será borrado.</string>
   <string name="KEY_WIPE_WIPECONTACTS">Barrer contactos</string>
   <string name="KEY_WIPE_WIPEPHOTOS">Barrer fotos</string>
   <string name="KEY_WIPE_CALLLOG">Barrer registro de llamadas</string>
   <string name="KEY_WIPE_SMS">Barrer registro de SMS</string>
   <string name="KEY_WIPE_CALENDAR">Barrer calendario</string>
   <string name="KEY_WIPE_SDCARD">Barrer tarjeta SD</string>
-  <string name="KEY_WIPE_EDIT_WIPE">Editar barrido</string>
-  <string name="KEY_WIPE_BTN_TITLE">¡BARRER!</string>
   <string name="KEY_WIPE_CONFIRMSELECT">Hecho</string>
   <string name="KEY_WIZARD_NEXT">Siguiente</string>
   <string name="KEY_WIZARD_BACK">Atrás</string>

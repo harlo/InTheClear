@@ -2,247 +2,102 @@
 package info.guardianproject.intheclear.apps;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import info.guardianproject.intheclear.ITCConstants;
+import info.guardianproject.intheclear.ITCConstants.Preference;
 import info.guardianproject.intheclear.R;
-import info.guardianproject.intheclear.controllers.WipeController;
-import info.guardianproject.intheclear.controllers.WipeController.LocalBinder;
-import info.guardianproject.intheclear.screens.WipePreferences;
-import info.guardianproject.intheclear.ui.WipeDisplay;
-import info.guardianproject.intheclear.ui.WipeDisplayAdaptor;
-import info.guardianproject.utils.EndActivity;
-
+import info.guardianproject.intheclear.ui.WipeItem;
+import info.guardianproject.intheclear.ui.WipeItemAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-public class Wipe extends Activity implements OnClickListener {
-    private SharedPreferences _sp;
-    SharedPreferences.Editor _ed;
+public class Wipe extends Activity {
+    private static final String TAG = "Wipe";
 
-    Button wipeButton, overrideWipePreferences;
-    ListView wipeDisplay;
-    LinearLayout wipeDisplayHolder;
-
-    Map<Integer, Boolean> wipePreferences = new HashMap<Integer, Boolean>();
-    boolean shouldWipePhotos, shouldWipeContacts, shouldWipeCallLog, shouldWipeSMS,
-            shouldWipeCalendar, shouldWipeFolders;
-
-    private WipeController wc;
-    BroadcastReceiver killReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            Intent toKill = new Intent(Wipe.this, EndActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            finish();
-            startActivity(toKill);
-
-        }
-
-    };
-    IntentFilter killFilter = new IntentFilter();
-    boolean isBound = false;
-
-    private ServiceConnection sc = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName cn, IBinder binder) {
-            LocalBinder lb = (WipeController.LocalBinder) binder;
-            wc = lb.getService();
-            isBound = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName cn) {
-            wc = null;
-            isBound = false;
-
-        }
-
-    };
+    private SharedPreferences sp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wipe);
 
-        wipeButton = (Button) findViewById(R.id.wipeButton);
-        wipeButton.setOnClickListener(this);
+        sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        overrideWipePreferences = (Button) findViewById(R.id.overrideWipePreferences);
-        overrideWipePreferences.setOnClickListener(this);
+        final ListView listView = (ListView) findViewById(R.id.wipeListView);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listView.setBackgroundColor(getResources().getColor(android.R.color.white));
 
-        wipeDisplayHolder = (LinearLayout) findViewById(R.id.wipeDisplayHolder);
+        final ArrayList<WipeItem> wipeTasks = new ArrayList<WipeItem>(6);
 
-        _sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        bindWipeService();
-    }
+        wipeTasks.add(0,
+                new WipeItem(R.string.KEY_WIPE_WIPECONTACTS, sp, Preference.DEFAULT_WIPE_CONTACTS));
+        wipeTasks.add(1,
+                new WipeItem(R.string.KEY_WIPE_WIPEPHOTOS, sp, Preference.DEFAULT_WIPE_PHOTOS));
+        wipeTasks.add(2,
+                new WipeItem(R.string.KEY_WIPE_CALLLOG, sp, Preference.DEFAULT_WIPE_CALLLOG));
+        wipeTasks.add(3,
+                new WipeItem(R.string.KEY_WIPE_SMS, sp, Preference.DEFAULT_WIPE_SMS));
+        wipeTasks.add(4,
+                new WipeItem(R.string.KEY_WIPE_CALENDAR, sp, Preference.DEFAULT_WIPE_CALENDAR));
+        wipeTasks.add(5,
+                new WipeItem(R.string.KEY_WIPE_SDCARD, sp, Preference.DEFAULT_WIPE_FOLDERS));
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+        listView.setAdapter(new WipeItemAdapter(this, wipeTasks));
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        alignPreferences();
-        killFilter.addAction(this.getClass().toString());
-        registerReceiver(killReceiver, killFilter);
-    }
-
-    @Override
-    public void onStop() {
-        updatePreferences();
-        unbindWipeService();
-        unregisterReceiver(killReceiver);
-        super.onStop();
-    }
-
-    private void alignPreferences() {
-        shouldWipeContacts = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_CONTACTS, false);
-        wipePreferences.put(ITCConstants.Wipe.CONTACTS, shouldWipeContacts);
-
-        shouldWipePhotos = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_PHOTOS, false);
-        wipePreferences.put(ITCConstants.Wipe.PHOTOS, shouldWipePhotos);
-
-        shouldWipeCallLog = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_CALLLOG, false);
-        wipePreferences.put(ITCConstants.Wipe.CALLLOG, shouldWipeCallLog);
-
-        shouldWipeSMS = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_SMS, false);
-        wipePreferences.put(ITCConstants.Wipe.SMS, shouldWipeSMS);
-
-        shouldWipeCalendar = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_CALENDAR, false);
-        wipePreferences.put(ITCConstants.Wipe.CALENDAR, shouldWipeCalendar);
-
-        shouldWipeFolders = _sp.getBoolean(ITCConstants.Preference.DEFAULT_WIPE_FOLDERS, false);
-        wipePreferences.put(ITCConstants.Wipe.SDCARD, shouldWipeFolders);
-
-        redrawWipeList();
-    }
-
-    private void updatePreferences() {
-        _ed = _sp.edit();
-        _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_CONTACTS, shouldWipeContacts).commit();
-        _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_PHOTOS, shouldWipePhotos).commit();
-        _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_CALLLOG, shouldWipeCallLog).commit();
-        _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_SMS, shouldWipeSMS).commit();
-        _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_CALENDAR, shouldWipeCalendar).commit();
-        _ed.putBoolean(ITCConstants.Preference.DEFAULT_WIPE_FOLDERS, shouldWipeFolders).commit();
-    }
-
-    private void redrawWipeList() {
-        if (wipeDisplay != null)
-            wipeDisplayHolder.removeView(wipeDisplay);
-
-        wipeDisplay = new ListView(this);
-        wipeDisplay.setDividerHeight(0);
-        ArrayList<WipeDisplay> wipeDisplayList = new ArrayList<WipeDisplay>();
-
-        wipeDisplayList.add(new WipeDisplay(getResources()
-                .getString(R.string.KEY_WIPE_WIPECONTACTS), shouldWipeContacts, this));
-        wipeDisplayList.add(new WipeDisplay(getResources().getString(R.string.KEY_WIPE_WIPEPHOTOS),
-                shouldWipePhotos, this));
-        wipeDisplayList.add(new WipeDisplay(getResources().getString(R.string.KEY_WIPE_CALLLOG),
-                shouldWipeCallLog, this));
-        wipeDisplayList.add(new WipeDisplay(getResources().getString(R.string.KEY_WIPE_SMS),
-                shouldWipeSMS, this));
-        wipeDisplayList.add(new WipeDisplay(getResources().getString(R.string.KEY_WIPE_CALENDAR),
-                shouldWipeCalendar, this));
-        wipeDisplayList.add(new WipeDisplay(getResources().getString(R.string.KEY_WIPE_SDCARD),
-                shouldWipeFolders, this));
-        wipeDisplay.setAdapter(new WipeDisplayAdaptor(this, wipeDisplayList));
-
-        wipeDisplayHolder.addView(wipeDisplay);
-    }
-
-    private void doWipe() {
-
-        // wipe baby!
-        wc.wipePIMData(
-                this,
-                shouldWipeContacts,
-                shouldWipePhotos,
-                shouldWipeCallLog,
-                shouldWipeSMS,
-                shouldWipeCalendar,
-                shouldWipeFolders);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK
-                && requestCode == ITCConstants.Results.OVERRIDE_WIPE_PREFERENCES) {
-            if (data.hasExtra(ITCConstants.Preference.WIPE_SELECTOR)) {
-                wipePreferences =
-                        ((ArrayList<Map<Integer, Boolean>>) data
-                                .getSerializableExtra(ITCConstants.Preference.WIPE_SELECTOR))
-                                .get(0);
-
-                shouldWipeContacts = wipePreferences.get(ITCConstants.Wipe.CONTACTS);
-                shouldWipePhotos = wipePreferences.get(ITCConstants.Wipe.PHOTOS);
-                shouldWipeCallLog = wipePreferences.get(ITCConstants.Wipe.CALLLOG);
-                shouldWipeSMS = wipePreferences.get(ITCConstants.Wipe.SMS);
-                shouldWipeCalendar = wipePreferences.get(ITCConstants.Wipe.CALENDAR);
-                shouldWipeFolders = wipePreferences.get(ITCConstants.Wipe.SDCARD);
-
-                redrawWipeList();
+        Button cancelButton = (Button) findViewById(R.id.cancel);
+        cancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
-        }
-    }
+        });
 
-    @Override
-    public void onClick(View v) {
-        if (v == wipeButton) {
-            doWipe();
-        } else if (v == overrideWipePreferences) {
-            ArrayList<Map<Integer, Boolean>> wp = new ArrayList<Map<Integer, Boolean>>();
-            wp.add(wipePreferences);
+        Button okButton = (Button) findViewById(R.id.ok);
+        okButton.setOnClickListener(new OnClickListener() {
 
-            Intent i = new Intent(this, WipePreferences.class);
-            i.putExtra(ITCConstants.Preference.WIPE_SELECTOR, wp);
-            startActivityForResult(i, ITCConstants.Results.OVERRIDE_WIPE_PREFERENCES);
-        }
-    }
-
-    private void bindWipeService() {
-        try {
-            if (!isBound) {
-                bindService(new Intent(Wipe.this, WipeController.class), sc,
-                        Context.BIND_AUTO_CREATE);
-                isBound = true;
+            @Override
+            public void onClick(View v) {
+                Editor editor = sp.edit();
+                SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+                for (int i = 0; i < checkedItems.size(); i++) {
+                    switch (checkedItems.keyAt(i)) {
+                        case 0:
+                            editor.putBoolean(Preference.DEFAULT_WIPE_CONTACTS,
+                                    checkedItems.valueAt(i));
+                            break;
+                        case 1:
+                            editor.putBoolean(Preference.DEFAULT_WIPE_PHOTOS,
+                                    checkedItems.valueAt(i));
+                            break;
+                        case 2:
+                            editor.putBoolean(Preference.DEFAULT_WIPE_CALLLOG,
+                                    checkedItems.valueAt(i));
+                            break;
+                        case 3:
+                            editor.putBoolean(Preference.DEFAULT_WIPE_SMS,
+                                    checkedItems.valueAt(i));
+                            break;
+                        case 4:
+                            editor.putBoolean(Preference.DEFAULT_WIPE_CALENDAR,
+                                    checkedItems.valueAt(i));
+                            break;
+                        case 5:
+                            editor.putBoolean(Preference.DEFAULT_WIPE_FOLDERS,
+                                    checkedItems.valueAt(i));
+                            break;
+                    }
+                }
+                editor.apply();
+                finish();
             }
-        } catch (IllegalArgumentException e) {
-        }
-    }
-
-    private void unbindWipeService() {
-        try {
-            if (isBound)
-                unbindService(sc);
-            isBound = false;
-            Log.d(ITCConstants.Log.ITC, "service is now unbound.");
-        } catch (IllegalArgumentException e) {
-        }
+        });
     }
 }

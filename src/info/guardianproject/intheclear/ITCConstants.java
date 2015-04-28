@@ -14,7 +14,6 @@ public class ITCConstants {
     public static class Wizard {
         public static final String ACTION = "org.safermobile.intheclear.Wizard";
         public static final String WIZARD_ACTION = "wizardAction";
-        public static final int LAUNCH_WIPE_SELECTOR = 1;
         public static final int SAVE_PREFERENCE_DATA = 2;
     }
 
@@ -33,9 +32,7 @@ public class ITCConstants {
     }
 
     public static class Results {
-        public static final int PREFERENCES_UPDATED = 1;
         public static final int SETUP_WIZARD = 2;
-        public static final int OVERRIDE_WIPE_PREFERENCES = 3;
         public static final int RETURN_FROM_PANIC = 4;
         public static final int NOT_AVAILABLE = 5;
         public static final int A_OK = 1;
