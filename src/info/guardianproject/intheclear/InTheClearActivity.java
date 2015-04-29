@@ -24,11 +24,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import java.util.Locale;
 
 public class InTheClearActivity extends Activity implements OnClickListener {
-    SharedPreferences _sp;
+
     ImageView logoPanic;
     GridView launchGrid;
 
@@ -38,8 +37,8 @@ public class InTheClearActivity extends Activity implements OnClickListener {
 
         setContentView(R.layout.main);
 
-        _sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        if (_sp.getBoolean("IsVirginUser", true)) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        if (prefs.getBoolean("IsVirginUser", true)) {
             AlertDialog.Builder ad = new AlertDialog.Builder(this);
             ad.setTitle(getResources().getString(R.string.KEY_PREF_LANGUAGE_TITLE));
 

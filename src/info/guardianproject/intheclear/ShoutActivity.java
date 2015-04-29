@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
@@ -18,12 +19,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import info.guardianproject.intheclear.R;
 import info.guardianproject.utils.EndActivity;
 
 public class ShoutActivity extends Activity implements OnClickListener, OnDismissListener {
-    private SharedPreferences _sp;
-    SharedPreferences.Editor _ed;
+    private SharedPreferences prefs;
 
     int[] screen;
     TextView configuredFriends, panicMessage, countdownReadout;
@@ -52,7 +51,7 @@ public class ShoutActivity extends Activity implements OnClickListener, OnDismis
                 getWindowManager().getDefaultDisplay().getHeight()
         };
 
-        _sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         configuredFriends = (TextView) findViewById(R.id.configuredFriends);
 
@@ -86,10 +85,10 @@ public class ShoutActivity extends Activity implements OnClickListener, OnDismis
     }
 
     private void alignPreferences() {
-        panicMsg = _sp.getString(ITCConstants.Preference.DEFAULT_PANIC_MSG, "");
+        panicMsg = prefs.getString(ITCConstants.Preference.DEFAULT_PANIC_MSG, "");
         panicMessageText.setText(panicMsg);
 
-        recipients = _sp.getString(ITCConstants.Preference.CONFIGURED_FRIENDS, "");
+        recipients = prefs.getString(ITCConstants.Preference.CONFIGURED_FRIENDS, "");
         configuredFriendsText.setText(recipients);
 
         if (recipients.compareTo("") == 0) {
@@ -109,9 +108,10 @@ public class ShoutActivity extends Activity implements OnClickListener, OnDismis
     }
 
     private void updatePreferences() {
-        _ed = _sp.edit();
-        _ed.putString(ITCConstants.Preference.DEFAULT_PANIC_MSG, panicMsg).commit();
-        _ed.putString(ITCConstants.Preference.CONFIGURED_FRIENDS, recipients).commit();
+        Editor editor = prefs.edit();
+        editor.putString(ITCConstants.Preference.DEFAULT_PANIC_MSG, panicMsg);
+        editor.putString(ITCConstants.Preference.CONFIGURED_FRIENDS, recipients);
+        editor.apply();
     }
 
     public void doCountdown() {

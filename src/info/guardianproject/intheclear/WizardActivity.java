@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -32,7 +33,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -45,8 +45,7 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
     TextView wizardTitle;
 
     Button wizardForward, wizardBackward;
-    SharedPreferences _sp;
-    SharedPreferences.Editor _ed;
+    SharedPreferences prefs;
 
     public ProgressDialog pd;
     public Dialog rd;
@@ -58,8 +57,7 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wizard);
 
-        _sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        _ed = _sp.edit();
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         wizardForward = (Button) findViewById(R.id.wizardForward);
         wizardForward.setText(getResources().getString(R.string.KEY_WIZARD_NEXT));
@@ -132,12 +130,12 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
             // Log.d(ITCConstants.Log.ITC,"THIS VIEW IS: " +
             // v.getClass().toString());
             if (v instanceof EditText && ((String) v.getContentDescription()).compareTo("") != 0) {
-                ((EditText) v).setHint(_sp.getString((String) v.getContentDescription(), ""));
+                ((EditText) v).setHint(prefs.getString((String) v.getContentDescription(), ""));
             } else if (v instanceof Button
                     && ((String) v.getContentDescription()).compareTo("") != 0) {
                 // actually, it's a checkbox, so we have to cast it.
                 ((CheckBox) v)
-                        .setSelected(_sp.getBoolean((String) v.getContentDescription(), false));
+                        .setSelected(prefs.getBoolean((String) v.getContentDescription(), false));
             } else if (v instanceof LinearLayout) {
                 populateDefaults(v);
             }
@@ -150,21 +148,21 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
          * iterate through the scroll view's content, and commit the changes
          * made to preference data if necessary
          */
-
+        Editor editor = prefs.edit();
         for (int x = 0; x < ((ViewGroup) view).getChildCount(); x++) {
             View v = ((ViewGroup) view).getChildAt(x);
             if (v instanceof EditText && ((String) v.getContentDescription()).compareTo("") != 0
                     && ((EditText) v).getText().length() > 0) {
-                _ed.putString((String) v.getContentDescription(),
-                        ((EditText) v).getText().toString()).commit();
+                editor.putString((String) v.getContentDescription(),
+                        ((EditText) v).getText().toString());
             } else if (v instanceof Button
                     && ((String) v.getContentDescription()).compareTo("") != 0) {
-                _ed.putBoolean((String) v.getContentDescription(), ((CheckBox) v).isSelected())
-                        .commit();
+                editor.putBoolean((String) v.getContentDescription(), ((CheckBox) v).isSelected());
             } else if (v instanceof LinearLayout) {
                 savePreferenceData(v);
             }
         }
+        editor.apply();
     }
 
     @Override
@@ -488,9 +486,9 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
                      * to false now that the user's cherry is sufficiently
                      * popped.
                      */
-                    if (_sp.getBoolean("IsVirginUser", true)) {
-                        _ed.putBoolean(ITCConstants.Preference.IS_VIRGIN_USER, false);
-                        _ed.commit();
+                    if (prefs.getBoolean("IsVirginUser", true)) {
+                        prefs.edit().putBoolean(ITCConstants.Preference.IS_VIRGIN_USER, false)
+                                .apply();
                     }
                     wizardForward.setText(getResources().getString(R.string.KEY_FINISH));
                     break;
