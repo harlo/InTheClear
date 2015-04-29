@@ -20,6 +20,24 @@ public class PanicReceiver {
 
     /**
      * Checks whether the provided {@link Activity} was started with the action
+     * {@link Panic.ACTION_CONNECT}, and if so, processes that {@link Intent} ,
+     * removing the sending app as the panic trigger if it is currently
+     * configured to be so.
+     *
+     * @param activity the {@code Activity} to check for the {@code Intent}
+     * @return the {@code ACTION_CONNECT Intent} received, otherwise
+     *         {@code null} if the {@code Intent} was not {@code ACTION_CONNECT}
+     */
+    public static Intent getConnectIntent(Activity activity) {
+        Intent intent = activity.getIntent();
+        if (TextUtils.equals(intent.getAction(), Panic.ACTION_CONNECT))
+            return intent;
+        else
+            return null;
+    }
+
+    /**
+     * Checks whether the provided {@link Activity} was started with the action
      * {@link Panic.ACTION_DISCONNECT}, and if so, processes that {@link Intent}
      * , removing the sending app as the panic trigger if it is currently
      * configured to be so.

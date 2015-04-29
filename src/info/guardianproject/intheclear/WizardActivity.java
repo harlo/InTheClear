@@ -33,6 +33,8 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import info.guardianproject.panic.PanicReceiver;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -55,6 +57,13 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent connectIntent = PanicReceiver.getConnectIntent(this);
+        if (connectIntent != null) {
+            wNum = 1;
+            setResult(Activity.RESULT_OK);
+        }
+
         setContentView(R.layout.wizard);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -193,7 +202,6 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
                 startActivity(i);
                 finish();
             } else {
-                setResult(Activity.RESULT_OK);
                 finish();
             }
         } else if (v == wizardBackward) {

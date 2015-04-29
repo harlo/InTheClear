@@ -57,6 +57,11 @@
             android:taskAffinity=".Wizard"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="info.guardianproject.panic.action.CONNECT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" >
             <intent-filter>
