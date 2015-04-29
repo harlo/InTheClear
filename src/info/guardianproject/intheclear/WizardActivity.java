@@ -191,9 +191,10 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
                     nextTarget = 4;
                 i.putExtra("wNum", nextTarget);
                 startActivity(i);
+                finish();
             } else {
-                Intent i = new Intent(this, InTheClearActivity.class);
-                startActivity(i);
+                setResult(Activity.RESULT_OK);
+                finish();
             }
         } else if (v == wizardBackward) {
             try {
@@ -213,9 +214,10 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
                     backTarget = 1;
                 i.putExtra("wNum", backTarget);
                 startActivity(i);
+                finish();
             } else if (wNum == 1) {
-                Intent i = new Intent(this, InTheClearActivity.class);
-                startActivity(i);
+                setResult(Activity.RESULT_CANCELED);
+                finish();
             }
         }
     }
