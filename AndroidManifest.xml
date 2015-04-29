@@ -32,8 +32,8 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@drawable/ic_launcher"
         android:description="@string/app_description"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
             android:name=".InTheClear"
@@ -53,13 +53,17 @@
             android:name=".Wizard"
             android:configChanges="orientation|keyboardHidden"
             android:icon="@drawable/setup"
-            android:label="InTheClear - Setup Wizard"
             android:screenOrientation="portrait"
             android:taskAffinity=".Wizard"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity android:name=".ITCPreferences" >
+            <intent-filter>
+                <action android:name="info.guardianproject.panic.action.DISCONNECT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".apps.Panic"

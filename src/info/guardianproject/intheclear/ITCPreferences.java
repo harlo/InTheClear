@@ -12,6 +12,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.util.Log;
 
+import info.guardianproject.panic.PanicReceiver;
+
 import java.util.Locale;
 
 public class ITCPreferences extends PreferenceActivity implements OnPreferenceChangeListener {
@@ -22,6 +24,12 @@ public class ITCPreferences extends PreferenceActivity implements OnPreferenceCh
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+
+        if (PanicReceiver.checkForDisconnectIntent(this)) {
+            Log.i("ITCPreferences", "disconnecting from trigger");
+            finish();
+            return;
+        }
 
         pc = (PreferenceCategory) findPreference(ITCConstants.Preference.WIPERCAT);
         pc.removePreference((CheckBoxPreference) findPreference("IsVirginUser"));
