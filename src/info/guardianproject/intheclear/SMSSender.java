@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.sms;
+package info.guardianproject.intheclear;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;

@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.controllers;
+package info.guardianproject.intheclear;
 
 import android.app.Service;
 import android.content.Context;
@@ -8,14 +8,12 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import info.guardianproject.intheclear.ITCConstants;
-import info.guardianproject.intheclear.data.PIMWiper;
 
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class WipeController extends Service {
+public class WipeService extends Service {
     boolean callbackAttached = false;
     String callbackClass;
     Context _c;
@@ -23,8 +21,8 @@ public class WipeController extends Service {
     TimerTask tt;
 
     public class LocalBinder extends Binder {
-        public WipeController getService() {
-            return WipeController.this;
+        public WipeService getService() {
+            return WipeService.this;
         }
     }
 

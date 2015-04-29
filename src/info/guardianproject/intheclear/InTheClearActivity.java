@@ -24,14 +24,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import info.guardianproject.intheclear.apps.Panic;
-import info.guardianproject.intheclear.apps.Shout;
-import info.guardianproject.intheclear.apps.Wipe;
-import info.guardianproject.intheclear.data.PhoneInfo;
 
 import java.util.Locale;
 
-public class InTheClear extends Activity implements OnClickListener {
+public class InTheClearActivity extends Activity implements OnClickListener {
     SharedPreferences _sp;
     ImageView logoPanic;
     GridView launchGrid;
@@ -82,12 +78,12 @@ public class InTheClear extends Activity implements OnClickListener {
     }
 
     private void launchWizard() {
-        Intent i = new Intent(this, Wizard.class);
+        Intent i = new Intent(this, WizardActivity.class);
         startActivity(i);
     }
 
     private void launchWipe() {
-        Intent i = new Intent(this, Wipe.class);
+        Intent i = new Intent(this, WipeActivity.class);
         startActivity(i);
     }
 
@@ -95,17 +91,17 @@ public class InTheClear extends Activity implements OnClickListener {
         if (TextUtils.isEmpty(PhoneInfo.getIMEI())) {
             Toast.makeText(this, "This device is not a cell phone", Toast.LENGTH_SHORT).show();
         }
-        Intent i = new Intent(this, Shout.class);
+        Intent i = new Intent(this, ShoutActivity.class);
         startActivity(i);
     }
 
     private void launchPanic() {
-        Intent i = new Intent(this, Panic.class);
+        Intent i = new Intent(this, PanicActivity.class);
         startActivity(i);
     }
 
     private void launchPreferences() {
-        Intent i = new Intent(this, ITCPreferences.class);
+        Intent i = new Intent(this, SettingsActivity.class);
         startActivity(i);
     }
 

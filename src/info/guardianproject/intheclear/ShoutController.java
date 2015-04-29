@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.controllers;
+package info.guardianproject.intheclear;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,9 +8,6 @@ import android.os.Handler;
 import android.os.Message;
 
 import info.guardianproject.intheclear.R;
-import info.guardianproject.intheclear.data.MovementTracker;
-import info.guardianproject.intheclear.data.PhoneInfo;
-import info.guardianproject.intheclear.sms.SMSSender;
 
 import java.util.Date;
 import java.util.StringTokenizer;

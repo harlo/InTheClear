@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.apps;
+package info.guardianproject.intheclear;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -13,13 +13,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import info.guardianproject.intheclear.ITCConstants.Preference;
-import info.guardianproject.intheclear.R;
-import info.guardianproject.intheclear.ui.WipeItem;
-import info.guardianproject.intheclear.ui.WipeItemAdapter;
 
 import java.util.ArrayList;
 
-public class Wipe extends Activity {
+public class WipeActivity extends Activity {
     private static final String TAG = "Wipe";
 
     private SharedPreferences sp;

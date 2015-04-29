@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.data;
+package info.guardianproject.intheclear;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -20,7 +20,6 @@ import android.provider.ContactsContract.Data;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import info.guardianproject.intheclear.ITCConstants;
 import info.guardianproject.intheclear.R;
 import info.guardianproject.utils.FolderIterator;
 

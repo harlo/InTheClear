@@ -16,7 +16,7 @@ import info.guardianproject.panic.PanicReceiver;
 
 import java.util.Locale;
 
-public class ITCPreferences extends PreferenceActivity implements OnPreferenceChangeListener {
+public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener {
     PreferenceCategory pc;
     ListPreference lang;
 
@@ -46,7 +46,7 @@ public class ITCPreferences extends PreferenceActivity implements OnPreferenceCh
         Log.d(ITCConstants.Log.ITC, "current configuration = "
                 + getBaseContext().getResources().getConfiguration().locale);
         // go to home to "reload" activity properly?
-        startActivity(new Intent(this, InTheClear.class));
+        startActivity(new Intent(this, InTheClearActivity.class));
     }
 
     @Override

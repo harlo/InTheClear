@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.ui;
+package info.guardianproject.intheclear;
 
 import android.content.SharedPreferences;
 

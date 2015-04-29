@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.apps;
+package info.guardianproject.intheclear;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,20 +25,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import info.guardianproject.intheclear.ITCConstants;
 import info.guardianproject.intheclear.ITCConstants.Preference;
-import info.guardianproject.intheclear.ITCPreferences;
-import info.guardianproject.intheclear.R;
-import info.guardianproject.intheclear.controllers.PanicController;
-import info.guardianproject.intheclear.controllers.ShoutController;
-import info.guardianproject.intheclear.data.PhoneInfo;
-import info.guardianproject.intheclear.ui.WipeItem;
-import info.guardianproject.intheclear.ui.WipeItemAdapter;
 import info.guardianproject.utils.EndActivity;
 
 import java.util.ArrayList;
 
-public class Panic extends Activity implements OnClickListener, OnDismissListener {
+public class PanicActivity extends Activity implements OnClickListener, OnDismissListener {
 
     SharedPreferences sp;
     boolean oneTouchPanic;
@@ -62,7 +54,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             switch (resultCode) {
 
-                case PanicController.UPDATE_PROGRESS:
+                case PanicService.UPDATE_PROGRESS:
                     updateProgressWindow(resultData.getString(ITCConstants.UPDATE_UI));
                     break;
             }
@@ -188,7 +180,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Panic.this.launchPreferences();
+                                    PanicActivity.this.launchPreferences();
                                 }
                             });
             AlertDialog a = d.create();
@@ -230,13 +222,13 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
     }
 
     public void killActivity() {
-        Intent toKill = new Intent(Panic.this, EndActivity.class)
+        Intent toKill = new Intent(PanicActivity.this, EndActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(toKill);
     }
 
     public void launchPreferences() {
-        Intent toPrefs = new Intent(this, ITCPreferences.class);
+        Intent toPrefs = new Intent(this, SettingsActivity.class);
         startActivity(toPrefs);
     }
 
@@ -250,7 +242,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
             @Override
             public void onFinish() {
                 // start the panic
-                Intent intent = new Intent(getApplicationContext(), PanicController.class);
+                Intent intent = new Intent(getApplicationContext(), PanicService.class);
                 intent.putExtra(RESULT_RECEIVER, resultReceiver);
                 startService(intent);
 

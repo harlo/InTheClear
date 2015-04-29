@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.apps;
+package info.guardianproject.intheclear;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,13 +18,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import info.guardianproject.intheclear.ITCConstants;
-import info.guardianproject.intheclear.ITCPreferences;
 import info.guardianproject.intheclear.R;
-import info.guardianproject.intheclear.controllers.ShoutController;
 import info.guardianproject.utils.EndActivity;
 
-public class Shout extends Activity implements OnClickListener, OnDismissListener {
+public class ShoutActivity extends Activity implements OnClickListener, OnDismissListener {
     private SharedPreferences _sp;
     SharedPreferences.Editor _ed;
 
@@ -103,7 +100,7 @@ public class Shout extends Activity implements OnClickListener, OnDismissListene
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Shout.this.launchPreferences();
+                                    ShoutActivity.this.launchPreferences();
                                 }
                             });
             AlertDialog a = d.create();
@@ -179,7 +176,7 @@ public class Shout extends Activity implements OnClickListener, OnDismissListene
     }
 
     public void launchPreferences() {
-        Intent toPrefs = new Intent(this, ITCPreferences.class);
+        Intent toPrefs = new Intent(this, SettingsActivity.class);
         startActivity(toPrefs);
     }
 }

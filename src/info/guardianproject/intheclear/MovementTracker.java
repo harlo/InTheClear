@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.data;
+package info.guardianproject.intheclear;
 
 import android.content.Context;
 import android.location.Criteria;
@@ -7,7 +7,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
 
-import info.guardianproject.intheclear.ITCConstants;
 
 
 public class MovementTracker {

@@ -32,15 +32,11 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import info.guardianproject.intheclear.apps.Wipe;
-import info.guardianproject.intheclear.data.PhoneInfo;
-import info.guardianproject.intheclear.sms.SMSSender;
-import info.guardianproject.intheclear.sms.SMSTesterConstants;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Wizard extends Activity implements OnClickListener, SMSTesterConstants {
+public class WizardActivity extends Activity implements OnClickListener, SMSTesterConstants {
     int wNum, nextWizard, lastWizard = 0;
 
     ScrollView sv;
@@ -185,7 +181,7 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
                 } catch (NullPointerException e) {
                 }
             if (wNum < getResources().getStringArray(R.array.WIZARD_TITLES).length) {
-                Intent i = new Intent(this, Wizard.class);
+                Intent i = new Intent(this, WizardActivity.class);
                 int nextTarget;
                 switch (wNum) {
                     default:
@@ -198,7 +194,7 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
                 i.putExtra("wNum", nextTarget);
                 startActivity(i);
             } else {
-                Intent i = new Intent(this, InTheClear.class);
+                Intent i = new Intent(this, InTheClearActivity.class);
                 startActivity(i);
             }
         } else if (v == wizardBackward) {
@@ -207,7 +203,7 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
             } catch (NullPointerException e) {
             }
             if (wNum > 1) {
-                Intent i = new Intent(this, Wizard.class);
+                Intent i = new Intent(this, WizardActivity.class);
                 int backTarget;
                 switch (wNum) {
                     default:
@@ -220,7 +216,7 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
                 i.putExtra("wNum", backTarget);
                 startActivity(i);
             } else if (wNum == 1) {
-                Intent i = new Intent(this, InTheClear.class);
+                Intent i = new Intent(this, InTheClearActivity.class);
                 startActivity(i);
             }
         }
@@ -452,8 +448,8 @@ public class Wizard extends Activity implements OnClickListener, SMSTesterConsta
 
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(Wizard.this, Wipe.class);
-                            Wizard.this.startActivity(i);
+                            Intent i = new Intent(WizardActivity.this, WipeActivity.class);
+                            WizardActivity.this.startActivity(i);
                             wizardForward.setEnabled(true);
                         }
                     });

@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.controllers;
+package info.guardianproject.intheclear;
 
 import android.app.IntentService;
 import android.app.Notification;
@@ -14,24 +14,19 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import info.guardianproject.intheclear.ITCConstants;
 import info.guardianproject.intheclear.ITCConstants.Preference;
-import info.guardianproject.intheclear.R;
-import info.guardianproject.intheclear.apps.Panic;
-import info.guardianproject.intheclear.data.PIMWiper;
-import info.guardianproject.intheclear.data.PhoneInfo;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PanicController extends IntentService {
+public class PanicService extends IntentService {
     private static final String TAG = "PanicController";
 
     public static final int UPDATE_PROGRESS = 0;
 
-    public PanicController() {
+    public PanicService() {
         super(TAG);
     }
 
@@ -47,7 +42,7 @@ public class PanicController extends IntentService {
     Intent backToPanic;
     int panicCount = 0;
 
-    WipeController wipeController;
+    WipeService wipeService;
     ShoutController shoutController;
 
     ArrayList<File> selectedFolders;
@@ -59,7 +54,7 @@ public class PanicController extends IntentService {
         nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (!TextUtils.isEmpty(PhoneInfo.getIMEI()))
             shoutController = new ShoutController(getBaseContext());
-        backToPanic = new Intent(this, Panic.class);
+        backToPanic = new Intent(this, PanicActivity.class);
         alignPreferences();
         showNotification();
     }
@@ -145,7 +140,7 @@ public class PanicController extends IntentService {
         Log.i(TAG, "getPackage() " + packageName);
         // TODO use TrustedIntents here to check trust
 
-        resultReceiver = intent.getParcelableExtra(Panic.RESULT_RECEIVER);
+        resultReceiver = intent.getParcelableExtra(PanicActivity.RESULT_RECEIVER);
 
         isPanicing = true;
         int shoutResult = shout();

@@ -1,5 +1,5 @@
 
-package info.guardianproject.intheclear.data;
+package info.guardianproject.intheclear;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;
