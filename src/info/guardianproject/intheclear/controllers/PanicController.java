@@ -7,7 +7,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
+import android.os.ResultReceiver;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,9 +29,7 @@ import java.util.TimerTask;
 public class PanicController extends IntentService {
     private static final String TAG = "PanicController";
 
-    public static final int PROGRESS = 0;
-
-    public static final String KEY_PROGRESS_MESSAGE = "progress_message";
+    public static final int UPDATE_PROGRESS = 0;
 
     public PanicController() {
         super(TAG);
@@ -37,10 +37,10 @@ public class PanicController extends IntentService {
 
     private NotificationManager nm;
     private SharedPreferences prefs;
+    private ResultReceiver resultReceiver;
 
-    TimerTask shoutTimerTask, ui;
+    TimerTask shoutTimerTask;
     Timer t = new Timer();
-    Timer u = new Timer();
     final Handler h = new Handler();
     boolean isPanicing = false;
 
@@ -73,18 +73,11 @@ public class PanicController extends IntentService {
     }
 
     public void updatePanicUi(String message) {
-        final Intent i = new Intent();
-        i.putExtra(ITCConstants.UPDATE_UI, message);
-        i.setAction(Panic.class.getName());
-
-        ui = new TimerTask() {
-            @Override
-            public void run() {
-                sendBroadcast(i);
-            }
-
-        };
-        u.schedule(ui, 0);
+        if (resultReceiver != null) {
+            final Bundle bundle = new Bundle();
+            bundle.putString(ITCConstants.UPDATE_UI, message);
+            resultReceiver.send(UPDATE_PROGRESS, bundle);
+        }
     }
 
     private int shout() {
@@ -151,6 +144,8 @@ public class PanicController extends IntentService {
         String packageName = intent.getPackage();
         Log.i(TAG, "getPackage() " + packageName);
         // TODO use TrustedIntents here to check trust
+
+        resultReceiver = intent.getParcelableExtra(Panic.RESULT_RECEIVER);
 
         isPanicing = true;
         int shoutResult = shout();

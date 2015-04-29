@@ -56,13 +56,14 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
     ProgressDialog panicStatusDialog;
     String currentPanicStatus;
 
+    public static final String RESULT_RECEIVER = "resultReceiver";
     private ResultReceiver resultReceiver = new ResultReceiver(new Handler()) {
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             switch (resultCode) {
 
-                case PanicController.PROGRESS:
-                    updateProgressWindow(resultData.getString(PanicController.KEY_PROGRESS_MESSAGE));
+                case PanicController.UPDATE_PROGRESS:
+                    updateProgressWindow(resultData.getString(ITCConstants.UPDATE_UI));
                     break;
             }
         }
@@ -249,7 +250,9 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
             @Override
             public void onFinish() {
                 // start the panic
-                startService(new Intent(getApplicationContext(), PanicController.class));
+                Intent intent = new Intent(getApplicationContext(), PanicController.class);
+                intent.putExtra(RESULT_RECEIVER, resultReceiver);
+                startService(intent);
 
                 // kill the activity
                 killActivity();
@@ -269,6 +272,5 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
 
         panicStatusDialog.show();
         cd.start();
-
     }
 }
