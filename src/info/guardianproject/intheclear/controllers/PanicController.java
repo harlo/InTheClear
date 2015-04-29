@@ -36,7 +36,7 @@ public class PanicController extends IntentService {
     }
 
     private NotificationManager nm;
-    SharedPreferences _sp;
+    private SharedPreferences prefs;
 
     TimerTask shoutTimerTask, ui;
     Timer t = new Timer();
@@ -65,11 +65,11 @@ public class PanicController extends IntentService {
     }
 
     private void alignPreferences() {
-        _sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         selectedFolders = new ArrayList<File>();
-        userDisplayName = _sp.getString(ITCConstants.Preference.USER_DISPLAY_NAME, "");
-        configuredFriends = _sp.getString(ITCConstants.Preference.CONFIGURED_FRIENDS, "");
+        userDisplayName = prefs.getString(ITCConstants.Preference.USER_DISPLAY_NAME, "");
+        configuredFriends = prefs.getString(ITCConstants.Preference.CONFIGURED_FRIENDS, "");
     }
 
     public void updatePanicUi(String message) {
@@ -127,12 +127,12 @@ public class PanicController extends IntentService {
         updatePanicUi(getString(R.string.KEY_PANIC_PROGRESS_2));
         new PIMWiper(
                 getBaseContext(),
-                _sp.getBoolean(Preference.DEFAULT_WIPE_CONTACTS, false),
-                _sp.getBoolean(Preference.DEFAULT_WIPE_PHOTOS, false),
-                _sp.getBoolean(Preference.DEFAULT_WIPE_CALLLOG, false),
-                _sp.getBoolean(Preference.DEFAULT_WIPE_SMS, false),
-                _sp.getBoolean(Preference.DEFAULT_WIPE_CALENDAR, false),
-                _sp.getBoolean(Preference.DEFAULT_WIPE_FOLDERS, false)).start();
+                prefs.getBoolean(Preference.DEFAULT_WIPE_CONTACTS, false),
+                prefs.getBoolean(Preference.DEFAULT_WIPE_PHOTOS, false),
+                prefs.getBoolean(Preference.DEFAULT_WIPE_CALLLOG, false),
+                prefs.getBoolean(Preference.DEFAULT_WIPE_SMS, false),
+                prefs.getBoolean(Preference.DEFAULT_WIPE_CALENDAR, false),
+                prefs.getBoolean(Preference.DEFAULT_WIPE_FOLDERS, false)).start();
         result = ITCConstants.Results.A_OK;
         return result;
     }

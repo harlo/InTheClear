@@ -53,7 +53,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
     Dialog countdown;
     CountDownTimer cd;
 
-    ProgressDialog panicStatus;
+    ProgressDialog panicStatusDialog;
     String currentPanicStatus;
 
     private ResultReceiver resultReceiver = new ResultReceiver(new Handler()) {
@@ -100,8 +100,8 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
                     + ShoutController.buildShoutData(getResources()));
         }
 
-        panicStatus = new ProgressDialog(this);
-        panicStatus.setButton(
+        panicStatusDialog = new ProgressDialog(this);
+        panicStatusDialog.setButton(
                 getResources().getString(R.string.KEY_PANIC_MENU_CANCEL),
                 new DialogInterface.OnClickListener() {
 
@@ -111,8 +111,8 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
                     }
                 }
                 );
-        panicStatus.setMessage(currentPanicStatus);
-        panicStatus.setTitle(getResources().getString(R.string.KEY_PANIC_BTN_PANIC));
+        panicStatusDialog.setMessage(currentPanicStatus);
+        panicStatusDialog.setTitle(getResources().getString(R.string.KEY_PANIC_BTN_PANIC));
 
     }
 
@@ -225,7 +225,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
     }
 
     public void updateProgressWindow(String message) {
-        panicStatus.setMessage(message);
+        panicStatusDialog.setMessage(message);
     }
 
     public void killActivity() {
@@ -257,7 +257,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
 
             @Override
             public void onTick(long millisUntilFinished) {
-                panicStatus.setMessage(
+                panicStatusDialog.setMessage(
                         getString(R.string.KEY_PANIC_COUNTDOWNMSG) +
                                 " " + t + " " +
                                 getString(R.string.KEY_SECONDS)
@@ -267,7 +267,7 @@ public class Panic extends Activity implements OnClickListener, OnDismissListene
 
         };
 
-        panicStatus.show();
+        panicStatusDialog.show();
         cd.start();
 
     }
