@@ -14,3 +14,6 @@ BUILD.MF
 
 # build products from tests
 *.class
+
+# eclipse cruft
+.settings/

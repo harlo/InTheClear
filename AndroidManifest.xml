@@ -44,7 +44,6 @@
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -104,7 +103,19 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden" >
         </activity>
+        <activity android:name=".DimplePanicActivity">
+            <intent-filter>
+                <action android:name="io.dimple.action.PLUGIN_LONGPRESS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name="info.guardianproject.utils.EndActivity" />
+        
+        <receiver android:name="io.dimple.s.DimplePluginBroadcastReceiver">
+            <intent-filter>
+                <action android:name="io.dimple.action.PLUGIN_LONGPRESS" />
+            </intent-filter>
+        </receiver>
 
         <service
             android:name=".PanicService"

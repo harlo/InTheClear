@@ -23,6 +23,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import io.dimple.s.DimplePluginActivity;
 
 import java.util.Locale;
 
