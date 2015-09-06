@@ -64,7 +64,6 @@ public class ShoutActivity extends Activity implements OnClickListener, OnDismis
 
         sendShout = (Button) findViewById(R.id.shoutBtn);
         sendShout.setOnClickListener(this);
-
     }
 
     @Override
@@ -126,13 +125,12 @@ public class ShoutActivity extends Activity implements OnClickListener, OnDismis
         countdown.show();
 
         t = 0;
-        cd = new CountDownTimer(ITCConstants.Duriation.COUNTDOWN,
-                ITCConstants.Duriation.COUNTDOWNINTERVAL) {
-            @Override
+        cd = new CountDownTimer(ITCConstants.Duriation.COUNTDOWN, ITCConstants.Duriation.COUNTDOWNINTERVAL) {
+            
+        	@Override
             public void onFinish() {
                 recipients = configuredFriendsText.getText().toString();
-                sc.sendSMSShout(recipients, panicMsg,
-                        ShoutController.buildShoutData(getResources()));
+                sc.sendSMSShout(recipients, panicMsg);
                 countdown.dismiss();
                 killActivity();
             }

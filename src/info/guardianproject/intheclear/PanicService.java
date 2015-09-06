@@ -13,7 +13,6 @@ import android.os.ResultReceiver;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
-
 import info.guardianproject.intheclear.ITCConstants.Preference;
 
 import java.io.File;
@@ -52,9 +51,10 @@ public class PanicService extends IntentService {
     public void onCreate() {
         super.onCreate();
         nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        if (!TextUtils.isEmpty(PhoneInfo.getIMEI()))
-            shoutController = new ShoutController(getBaseContext());
+        
+        shoutController = new ShoutController(getBaseContext());
         backToPanic = new Intent(this, PanicActivity.class);
+        
         alignPreferences();
         showNotification();
     }
@@ -76,8 +76,10 @@ public class PanicService extends IntentService {
     }
 
     private int shout() {
-        if (shoutController == null)
+        if (shoutController == null) {
             return ITCConstants.Results.NOT_AVAILABLE;
+        }
+        
         int result = ITCConstants.Results.FAIL;
         updatePanicUi(getString(R.string.KEY_PANIC_PROGRESS_1));
 
@@ -91,11 +93,7 @@ public class PanicService extends IntentService {
                     public void run() {
                         if (isPanicing) {
                             // TODO: this should actually be confirmed.
-                            shoutController.sendSMSShout(
-                                    configuredFriends,
-                                    defaultPanicMsg,
-                                    ShoutController.buildShoutData(getResources())
-                                    );
+                            shoutController.sendSMSShout(configuredFriends, defaultPanicMsg);
                             Log.d(ITCConstants.Log.ITC, "this is a shout going out...");
                             panicCount++;
                         }
@@ -144,28 +142,25 @@ public class PanicService extends IntentService {
 
         isPanicing = true;
         int shoutResult = shout();
-        if (shoutResult == ITCConstants.Results.A_OK
-                || shoutResult == ITCConstants.Results.NOT_AVAILABLE)
+        if (shoutResult == ITCConstants.Results.A_OK || shoutResult == ITCConstants.Results.NOT_AVAILABLE) {
             if (wipe() == ITCConstants.Results.A_OK) {
                 updatePanicUi(getString(R.string.KEY_PANIC_PROGRESS_3));
             } else {
                 Log.d(ITCConstants.Log.ITC, "SOMETHING WAS WRONG WITH WIPE");
             }
-        else {
+        } else {
             Log.d(ITCConstants.Log.ITC, "SOMETHING WAS WRONG WITH SHOUT");
         }
     }
 
-    private void showNotification() {
+    @SuppressWarnings("deprecation")
+	private void showNotification() {
         backToPanic.putExtra("PanicCount", panicCount);
         backToPanic.putExtra("ReturnFrom", ITCConstants.Panic.RETURN);
         backToPanic.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        Notification n = new Notification(
-                R.drawable.panic,
-                getString(R.string.KEY_PANIC_TITLE_MAIN),
-                System.currentTimeMillis()
-                );
+        Notification n = new Notification(R.drawable.panic, getString(R.string.KEY_PANIC_TITLE_MAIN), 
+        		System.currentTimeMillis());
 
         PendingIntent pi = PendingIntent.getActivity(
                 this,
@@ -174,12 +169,8 @@ public class PanicService extends IntentService {
                 PendingIntent.FLAG_UPDATE_CURRENT
                 );
 
-        n.setLatestEventInfo(
-                this,
-                getString(R.string.KEY_PANIC_TITLE_MAIN),
-                getString(R.string.KEY_PANIC_RETURN),
-                pi
-                );
+        n.setLatestEventInfo(this, getString(R.string.KEY_PANIC_TITLE_MAIN),
+                getString(R.string.KEY_PANIC_RETURN), pi);
 
         nm.notify(R.string.remote_service_start_id, n);
     }

@@ -4,9 +4,10 @@ package info.guardianproject.intheclear;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.telephony.gsm.GsmCellLocation;
+import android.util.Log;
 
 public class PhoneInfo {
-    static TelephonyManager tm;
+    TelephonyManager tm;
     Context c;
 
     public PhoneInfo(Context c) {
@@ -14,34 +15,19 @@ public class PhoneInfo {
         tm = (TelephonyManager) c.getSystemService(Context.TELEPHONY_SERVICE);
     }
 
-    public static String testData() {
-        StringBuffer sb = new StringBuffer();
-        if (getIMEI() != null)
-            sb.append("IMEI: " + PhoneInfo.getIMEI() + "\n");
-        if (getIMSI() != null)
-            sb.append("IMSI: " + PhoneInfo.getIMSI() + "\n");
-        if (getCellId() != null)
-            sb.append("CID: " + PhoneInfo.getCellId() + "\n");
-        if (getLAC() != null)
-            sb.append("LAC: " + PhoneInfo.getLAC() + "\n");
-        if (getMCC() != null)
-            sb.append("MCC: " + PhoneInfo.getMCC() + "\n");
-        if (getMNC() != null)
-            sb.append("MNC: " + PhoneInfo.getMNC() + "\n");
-        return sb.toString();
-    }
-
-    public static String getMyPhoneNumber() {
+    public String getMyPhoneNumber() {
         String out = "";
+        
         try {
             out = tm.getLine1Number();
-            return out;
         } catch (NullPointerException e) {
-            return "";
+        	Log.e(ITCConstants.Log.ITC, "error getting phone number: " + e.toString());
         }
+        
+        return out;
     }
 
-    public static String getOperator() {
+    public String getOperator() {
         String out = "";
         try {
             if (tm.getPhoneType() != TelephonyManager.PHONE_TYPE_NONE)
@@ -52,7 +38,7 @@ public class PhoneInfo {
         }
     }
 
-    public static String getCellId() {
+    public String getCellId() {
         String out = "";
         try {
             if (tm.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) {
@@ -66,7 +52,7 @@ public class PhoneInfo {
         }
     }
 
-    public static String getLAC() {
+    public String getLAC() {
         String out = "";
         try {
             if (tm.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) {
@@ -81,7 +67,7 @@ public class PhoneInfo {
 
     }
 
-    public static String getIMSI() {
+    public String getIMSI() {
         String out = "";
         try {
             out = tm.getSubscriberId();
@@ -91,7 +77,7 @@ public class PhoneInfo {
         }
     }
 
-    public static String getMCC() {
+    public String getMCC() {
         String out = "";
         try {
             out = tm.getNetworkOperator().substring(0, 3);
@@ -101,7 +87,7 @@ public class PhoneInfo {
         }
     }
 
-    public static String getMNC() {
+    public String getMNC() {
         String out = "";
         try {
             out = tm.getNetworkOperator().substring(3);
@@ -111,7 +97,7 @@ public class PhoneInfo {
         }
     }
 
-    public static String getIMEI() {
+    public String getIMEI() {
         String out = "";
         try {
             out = tm.getDeviceId();

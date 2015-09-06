@@ -1,6 +1,7 @@
 
 package info.guardianproject.intheclear;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -23,8 +24,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import io.dimple.s.DimplePluginActivity;
-
 import java.util.Locale;
 
 public class InTheClearActivity extends Activity implements OnClickListener {
@@ -88,9 +87,6 @@ public class InTheClearActivity extends Activity implements OnClickListener {
     }
 
     private void launchShout() {
-        if (TextUtils.isEmpty(PhoneInfo.getIMEI())) {
-            Toast.makeText(this, "This device is not a cell phone", Toast.LENGTH_SHORT).show();
-        }
         Intent i = new Intent(this, ShoutActivity.class);
         startActivity(i);
     }
@@ -137,7 +133,8 @@ public class InTheClearActivity extends Activity implements OnClickListener {
             return 4;
         }
 
-        @Override
+        @SuppressLint("InflateParams")
+		@Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
             View gridItem = convertView;

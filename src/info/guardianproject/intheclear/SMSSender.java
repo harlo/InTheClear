@@ -85,20 +85,17 @@ public class SMSSender implements SMSTesterConstants {
                 if (getResultCode() != SMS_SENT) {
                     // the attempt to send has failed.
                     smsThread.exitWithResult(false, SMS_SENDING, getResultCode());
-                    context.unregisterReceiver(this);
                 }
             } else if (intent.getAction().compareTo(DELIVERED) == 0) {
                 if (getResultCode() != SMS_DELIVERED) {
                     // the attempt to deliver has failed.
                     smsThread.exitWithResult(false, SMS_DELIVERY, getResultCode());
-                    context.unregisterReceiver(this);
                 } else {
                     smsThread.exitWithResult(true, SMS_DELIVERY, getResultCode());
-                    context.unregisterReceiver(this);
-
                 }
             }
-
+            
+            context.unregisterReceiver(this);
         }
 
     }

@@ -24,7 +24,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import info.guardianproject.intheclear.ITCConstants.Preference;
 import info.guardianproject.utils.EndActivity;
 
@@ -71,7 +70,8 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
     };
     IntentFilter killFilter = new IntentFilter();
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.panic);
@@ -83,27 +83,28 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
         listView = (ListView) findViewById(R.id.wipeItems);
 
         // if this is not a cell phone, then no need to show the panic message
-        if (TextUtils.isEmpty(PhoneInfo.getIMEI())) {
+        ShoutController sc = new ShoutController(this);
+        
+        if (TextUtils.isEmpty(sc.pi.getIMEI())) {
             shoutReadout.setVisibility(View.GONE);
             TextView shoutReadoutTitle = (TextView) findViewById(R.id.shoutReadoutTitle);
             shoutReadoutTitle.setVisibility(View.GONE);
         } else {
-            String panicMsg = sp.getString(ITCConstants.Preference.DEFAULT_PANIC_MSG, "");
-            shoutReadout.setText("\n\n" + panicMsg + "\n\n"
-                    + ShoutController.buildShoutData(getResources()));
+        	String panicMsg = sp.getString(ITCConstants.Preference.DEFAULT_PANIC_MSG, "");
+            shoutReadout.setText("\n\n" + panicMsg + "\n\n" + sc.buildShoutData());
         }
 
         panicStatusDialog = new ProgressDialog(this);
-        panicStatusDialog.setButton(
-                getResources().getString(R.string.KEY_PANIC_MENU_CANCEL),
-                new DialogInterface.OnClickListener() {
+        panicStatusDialog.setButton(getResources().getString(R.string.KEY_PANIC_MENU_CANCEL), 
+        		new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         cancelPanic();
                     }
                 }
-                );
+        );
+        
         panicStatusDialog.setMessage(currentPanicStatus);
         panicStatusDialog.setTitle(getResources().getString(R.string.KEY_PANIC_BTN_PANIC));
 
@@ -139,6 +140,9 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
     public void onStart() {
         super.onStart();
         alignPreferences();
+        
+        // check to see if we're starting with the dimple intent first
+        
         if (!oneTouchPanic) {
             panicControl.setText(this.getResources().getString(R.string.KEY_PANIC_BTN_PANIC));
             panicControl.setOnClickListener(this);
@@ -231,23 +235,26 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
         Intent toPrefs = new Intent(this, SettingsActivity.class);
         startActivity(toPrefs);
     }
-
+    
     private void doPanic() {
+    	doPanic(false);
+    }
+
+    private void doPanic(boolean auto_start) {
         panicState = ITCConstants.PanicState.IN_COUNTDOWN;
         panicControl.setText(getString(R.string.KEY_PANIC_MENU_CANCEL));
-        cd = new CountDownTimer(ITCConstants.Duriation.COUNTDOWN,
-                ITCConstants.Duriation.COUNTDOWNINTERVAL) {
+        
+        if(!auto_start) {
+        	startPanic();
+        	return;
+        }
+        
+        cd = new CountDownTimer(ITCConstants.Duriation.COUNTDOWN, ITCConstants.Duriation.COUNTDOWNINTERVAL) {
             int t = 5;
 
             @Override
             public void onFinish() {
-                // start the panic
-                Intent intent = new Intent(getApplicationContext(), PanicService.class);
-                intent.putExtra(RESULT_RECEIVER, resultReceiver);
-                startService(intent);
-
-                // kill the activity
-                killActivity();
+                startPanic();
             }
 
             @Override
@@ -264,5 +271,15 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
 
         panicStatusDialog.show();
         cd.start();
+    }
+   
+    private void startPanic() {
+    	// start the panic
+        Intent intent = new Intent(getApplicationContext(), PanicService.class);
+        intent.putExtra(RESULT_RECEIVER, resultReceiver);
+        startService(intent);
+
+        // kill the activity
+        killActivity();
     }
 }

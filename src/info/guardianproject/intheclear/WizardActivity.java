@@ -53,6 +53,8 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
     public Dialog rd;
 
     int[] statusColors;
+    
+    PhoneInfo pi;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
 
         setContentView(R.layout.wizard);
 
+        pi = new PhoneInfo(this);
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         wizardForward = (Button) findViewById(R.id.wizardForward);
@@ -196,7 +199,7 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
                         break;
                 }
                 // skip the phone config if device is not a phone
-                if (TextUtils.isEmpty(PhoneInfo.getIMEI()) && (nextTarget == 2 || nextTarget == 3))
+                if (TextUtils.isEmpty(pi.getIMEI()) && (nextTarget == 2 || nextTarget == 3))
                     nextTarget = 4;
                 i.putExtra("wNum", nextTarget);
                 startActivity(i);
@@ -218,7 +221,7 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
                         break;
                 }
                 // skip the phone config if device is not a phone
-                if (TextUtils.isEmpty(PhoneInfo.getIMEI()) && (backTarget == 2 || backTarget == 3))
+                if (TextUtils.isEmpty(pi.getIMEI()) && (backTarget == 2 || backTarget == 3))
                     backTarget = 1;
                 i.putExtra("wNum", backTarget);
                 startActivity(i);
