@@ -29,6 +29,7 @@ public class ITCConstants {
 
     public static class Panic {
         public static final int RETURN = Activity.RESULT_OK;
+		public static final String AUTO_START = "auto_start_panic";
     }
 
     public static class Results {

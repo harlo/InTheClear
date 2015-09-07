@@ -15,7 +15,7 @@ public class DimplePanicActivity extends DimplePluginActivity {
 			if("create".equals(extras.getString("type"))) {
 				createPlugin(true, extras.getInt("memory"));
 			} else if("execute".equals(extras.getString("type"))) {
-				Intent i = new Intent(this, PanicActivity.class).putExtra("auto_start_panic", true);
+				Intent i = new Intent(this, PanicActivity.class).putExtra(ITCConstants.Panic.AUTO_START, true);
 		        startActivity(i);
 			} else {
 				finish();
@@ -23,12 +23,11 @@ public class DimplePanicActivity extends DimplePluginActivity {
 		} else {
 			finish();
 		}
-		
 	}
 
 	@Override
 	public void createPlugin(boolean longPress, int memorySize) {
-		setResult(RESULT_OK, new Intent().putExtra("data", new String(getString(R.string.KEY_PANIC_BTN_PANIC).getBytes())));
+		setResult(RESULT_OK, new Intent().putExtra("data", new String(getString(R.string.KEY_PANIC_BTN_PANIC)).getBytes()));
 		finish();
 	}
 

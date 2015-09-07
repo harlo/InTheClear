@@ -47,7 +47,7 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
     Button controlPanic, cancelCountdown, panicControl;
     
     Dialog countdown;
-    CountDownTimer cd;
+    CountDownTimer cd = null;
 
     ProgressDialog panicStatusDialog;
         
@@ -58,6 +58,7 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			panicService = ((PanicService.PanicServiceBinder) service).getService();
+			initPanic();
 			//Log.i(ITCConstants.Log.ITC, "panic service attached.");
 		}
 
@@ -121,6 +122,7 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
         
         panicStatusDialog.setMessage(currentPanicStatus);
         panicStatusDialog.setTitle(getResources().getString(R.string.KEY_PANIC_BTN_PANIC));
+        panicStatusDialog.setCancelable(false);
         
         Intent panic_service = new Intent(this, PanicService.class);
         bindService(panic_service, panicServiceConnection, Context.BIND_AUTO_CREATE);
@@ -128,7 +130,6 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
 
     @Override
     public void onResume() {
-
         final ArrayList<WipeItem> wipeTasks = new ArrayList<WipeItem>(6);
         wipeTasks.add(0,
                 new WipeItem(R.string.KEY_WIPE_WIPECONTACTS, sp, Preference.DEFAULT_WIPE_CONTACTS));
@@ -149,7 +150,7 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
 
         killFilter.addAction(this.getClass().toString());
         registerReceiver(killReceiver, killFilter);
-
+               
         super.onResume();
     }
 
@@ -157,16 +158,24 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
     public void onStart() {
         super.onStart();
         alignPreferences();
+    }
+    
+    protected void initPanic() {
+    	boolean autoStart = false;
         
         // check to see if we're starting with the dimple intent first
+        if(getIntent().hasExtra(ITCConstants.Panic.AUTO_START)) {
+        	autoStart = getIntent().getExtras().getBoolean(ITCConstants.Panic.AUTO_START);
+        	getIntent().removeExtra(ITCConstants.Panic.AUTO_START);
+        }
         
-        if (!oneTouchPanic) {
-            panicControl.setText(this.getResources().getString(R.string.KEY_PANIC_BTN_PANIC));
+        if(autoStart || oneTouchPanic) {
+        	panicControl.setText(getString(R.string.KEY_PANIC_MENU_CANCEL));
             panicControl.setOnClickListener(this);
+            doPanic(autoStart);
         } else {
-            panicControl.setText(getString(R.string.KEY_PANIC_MENU_CANCEL));
+        	panicControl.setText(this.getResources().getString(R.string.KEY_PANIC_BTN_PANIC));
             panicControl.setOnClickListener(this);
-            doPanic();
         }
     }
 
@@ -271,6 +280,8 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
         panicState = IN_COUNTDOWN;
         panicControl.setText(getString(R.string.KEY_PANIC_MENU_CANCEL));
         
+        panicStatusDialog.show();
+        
         if(auto_start) {
         	startPanic();
         	return;
@@ -294,7 +305,6 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
 
         };
 
-        panicStatusDialog.show();
         cd.start();
     }
    
@@ -313,7 +323,7 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
     }
 
     public void cancelPanic() {
-        if (panicState == IN_COUNTDOWN) {
+        if (cd != null && panicState == IN_COUNTDOWN) {
             // if panic hasn't started, then just kill the countdown
             cd.cancel();
         }
@@ -328,6 +338,13 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
         
         killActivity();
         finish();
+    }
+    
+    @Override
+    public void onBackPressed() {
+    	if(panicState == AT_REST) {
+    		super.onBackPressed();
+    	}
     }
     
     @SuppressLint("HandlerLeak")
