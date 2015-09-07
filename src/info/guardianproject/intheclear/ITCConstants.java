@@ -166,7 +166,7 @@ public class ITCConstants {
         }
     }
 
-    public static class Duriation {
+    public static class Duration {
         public static final long SPLASH = 3000L;
         public static final long COUNTDOWN = 6000L;
         public static final long COUNTDOWNINTERVAL = 1000L;

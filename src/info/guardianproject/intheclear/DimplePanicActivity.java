@@ -15,14 +15,14 @@ public class DimplePanicActivity extends DimplePluginActivity {
 			if("create".equals(extras.getString("type"))) {
 				createPlugin(true, extras.getInt("memory"));
 			} else if("execute".equals(extras.getString("type"))) {
-				Intent i = new Intent(this, PanicActivity.class).putExtra(ITCConstants.Panic.AUTO_START, true);
+				Intent i = new Intent(this, PanicActivity.class)
+					.putExtra(ITCConstants.Panic.AUTO_START, true)
+					.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
 		        startActivity(i);
-			} else {
-				finish();
 			}
-		} else {
-			finish();
 		}
+		
+		finish();
 	}
 
 	@Override

@@ -287,7 +287,7 @@ public class PanicActivity extends Activity implements OnClickListener, OnDismis
         	return;
         }
         
-        cd = new CountDownTimer(ITCConstants.Duriation.COUNTDOWN, ITCConstants.Duriation.COUNTDOWNINTERVAL) {
+        cd = new CountDownTimer(ITCConstants.Duration.COUNTDOWN, ITCConstants.Duration.COUNTDOWNINTERVAL) {
             int t = 5;
 
             @Override

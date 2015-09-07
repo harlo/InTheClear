@@ -92,7 +92,7 @@ public class InTheClearActivity extends Activity implements OnClickListener {
     }
 
     private void launchPanic() {
-        Intent i = new Intent(this, PanicActivity.class);
+        Intent i = new Intent(this, PanicActivity.class).addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         startActivity(i);
     }
 

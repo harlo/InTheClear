@@ -95,7 +95,8 @@ public class PanicService extends Service implements PanicMessageConstants {
     	int shoutResult = shout();		
 		if (shoutResult == ITCConstants.Results.A_OK || shoutResult == ITCConstants.Results.NOT_AVAILABLE) {
 			if (wipe() == ITCConstants.Results.A_OK) {
-				updatePanicUi(getString(R.string.KEY_PANIC_PROGRESS_3));
+				updatePanicUi(String.format(getString(R.string.KEY_PANIC_PROGRESS_3), 
+						(ITCConstants.Duration.CONTINUED_PANIC/1000)));
 			} else {
 				Log.d(ITCConstants.Log.ITC, "SOMETHING WAS WRONG WITH WIPE");
 			}
@@ -164,7 +165,7 @@ public class PanicService extends Service implements PanicMessageConstants {
 
         };
 
-        t.schedule(shoutTimerTask, 0, ITCConstants.Duriation.CONTINUED_PANIC);
+        t.schedule(shoutTimerTask, 0, ITCConstants.Duration.CONTINUED_PANIC);
         result = ITCConstants.Results.A_OK;
         return result;
     }
@@ -193,8 +194,9 @@ public class PanicService extends Service implements PanicMessageConstants {
                 backToPanic, PendingIntent.FLAG_UPDATE_CURRENT);
         
         NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this)
-        	.setSmallIcon(R.drawable.ic_launcher)
+        	.setSmallIcon(R.drawable.btn_panic)
         	.setContentTitle(getString(R.string.KEY_PANIC_TITLE_MAIN))
+        	.setOngoing(true)
         	.setContentIntent(pi);
 
         nm.notify(R.string.remote_service_start_id, nBuilder.build());

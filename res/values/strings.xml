@@ -13,9 +13,9 @@
     <string name="KEY_WIPE_SETTINGS_TITLE">InTheClear Data Wipe Settings</string>
     <string name="KEY_PANIC_TITLE">Panic!</string>
     <string name="KEY_PANIC_MSG_TITLE">Panic Message:</string>
-    <string name="KEY_PANIC_PROGRESS_1">Sending your Panic! message…</string>
-    <string name="KEY_PANIC_PROGRESS_2">Wiping selected data from your phone…</string>
-    <string name="KEY_PANIC_PROGRESS_3">Your phone will continue to Panic! every 45 seconds until you cancel this process…</string>
+    <string name="KEY_PANIC_PROGRESS_1">Sending your Panic! message\u2026</string>
+    <string name="KEY_PANIC_PROGRESS_2">Wiping selected data from your phone\u2026</string>
+    <string name="KEY_PANIC_PROGRESS_3">Your phone will continue to Panic! every %1$d seconds until you cancel this process…</string>
     <string name="KEY_PANIC_BTN_PANIC">Panic!</string>
     <string name="KEY_PANIC_MENU_CANCEL">Cancel Panic!</string>
     <string name="KEY_PANIC_COUNTDOWNMSG">Panic! in </string>
@@ -70,7 +70,7 @@
     <string name="KEY_WIZARD_NEXT">Next</string>
     <string name="KEY_WIZARD_BACK">Back</string>
     <string name="KEY_WIZARD_TESTING_SMS_TITLE">Testing Emergency SMS</string>
-    <string name="KEY_WIZARD_PLEASE_WAIT">Please Wait…</string>
+    <string name="KEY_WIZARD_PLEASE_WAIT">Please Wait\u2026</string>
 
     <string-array name="WIZARD_TITLES">
         <item>InTheClear Setup</item>

@@ -103,7 +103,8 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden" >
         </activity>
-        <activity android:name=".DimplePanicActivity">
+        <activity android:name=".DimplePanicActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="io.dimple.action.PLUGIN" />
                 <category android:name="android.intent.category.DEFAULT" />
