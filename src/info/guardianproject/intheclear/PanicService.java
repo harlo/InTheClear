@@ -29,6 +29,7 @@ public class PanicService extends Service implements PanicMessageConstants {
     boolean isPanicing = false;
 
     private NotificationManager nm;
+    private NotificationCompat.Builder nBuilder;
     private SharedPreferences prefs;
     
     final Messenger panicMessageHandler = new Messenger(new PanicMessageHandler());
@@ -78,6 +79,12 @@ public class PanicService extends Service implements PanicMessageConstants {
         alignPreferences();
         showNotification();
     }
+    
+    @Override
+    public void onDestroy() {
+    	nm.cancel(R.string.remote_service_start_id);
+    	super.onDestroy();
+    }
 
     private void alignPreferences() {
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -107,6 +114,7 @@ public class PanicService extends Service implements PanicMessageConstants {
     
     protected void stopPanic() {
     	Log.i(ITCConstants.Log.PS, "STOP PANIC INVOKED.");
+    	nBuilder.setOngoing(false);
     	shoutController.tearDownSMSReceiver();
     	
     	if (isPanicing) {
@@ -117,7 +125,7 @@ public class PanicService extends Service implements PanicMessageConstants {
             isPanicing = false;
         }
     	    	
-        nm.cancel(R.string.remote_service_start_id);
+        //nm.cancel(R.string.remote_service_start_id);
         stopSelf();
     }
     
@@ -193,7 +201,7 @@ public class PanicService extends Service implements PanicMessageConstants {
         PendingIntent pi = PendingIntent.getActivity(this, ITCConstants.Results.RETURN_FROM_PANIC,
                 backToPanic, PendingIntent.FLAG_UPDATE_CURRENT);
         
-        NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this)
+        nBuilder = new NotificationCompat.Builder(this)
         	.setSmallIcon(R.drawable.btn_panic)
         	.setContentTitle(getString(R.string.KEY_PANIC_TITLE_MAIN))
         	.setOngoing(true)
