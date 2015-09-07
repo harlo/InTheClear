@@ -169,7 +169,7 @@ public class ITCConstants {
         public static final long SPLASH = 3000L;
         public static final long COUNTDOWN = 6000L;
         public static final long COUNTDOWNINTERVAL = 1000L;
-        public static final long CONTINUED_PANIC = 15000L; //60000L;
+        public static final long CONTINUED_PANIC = 60000L;
     }
 
     public static class Preference {
