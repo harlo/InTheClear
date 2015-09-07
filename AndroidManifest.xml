@@ -119,16 +119,12 @@
 
         <service
             android:name=".PanicService"
-            android:enabled="true" >
-            <intent-filter>
-                <action android:name="info.guardianproject.panic.action.TRIGGER" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </service>
+            android:enabled="true"
+            android:exported="false" />
         <service
             android:name=".WipeService"
-            android:enabled="true" />
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

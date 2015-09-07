@@ -55,6 +55,7 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
     int[] statusColors;
     
     PhoneInfo pi;
+    ShoutController sms;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -587,12 +588,13 @@ public class WizardActivity extends Activity implements OnClickListener, SMSTest
 
             // initiate SMSSender instance with customized handler
             // so UI will update according to SMSSender results
-            SMSSender sms = new SMSSender(c, new Handler() {
+            sms = new ShoutController(c, new Handler() {
 
                 @Override
                 public void handleMessage(Message message) {
                     pd.dismiss();
                     displayTestSMSResults(message);
+                    sms.tearDownSMSReceiver();
                 }
             });
 

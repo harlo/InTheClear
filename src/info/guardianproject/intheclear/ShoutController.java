@@ -2,36 +2,113 @@
 package info.guardianproject.intheclear;
 
 import android.annotation.SuppressLint;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
+import android.telephony.SmsManager;
 import info.guardianproject.intheclear.R;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class ShoutController {
+public class ShoutController implements SMSTesterConstants {
     Resources res;
     PhoneInfo pi;
-    SMSSender sms;
     MovementTracker mt;
     Handler h;
+    Context c;
+    SMSConfirm smsconfirm;
+    PendingIntent _sentPI, _deliveredPI;
+    
+    public ShoutController(Context c) {
+    	this(c, null);
+    }
 
-    @SuppressLint("HandlerLeak")
-	public ShoutController(Context c) {
-        h = new Handler() {
-            @Override
-            public void handleMessage(Message message) {
-                // TODO: handle confirmation of sent text
-                // perhaps broadcast this to calling activity?
+	@SuppressLint("HandlerLeak")
+	public ShoutController(Context c, Handler h) {
+		this.c = c;
+		
+		if(h == null) {
+			this.h = new Handler() {
+				@Override
+				public void handleMessage(Message message) {
+					// TODO: handle confirmation of sent text
+					// perhaps broadcast this to calling activity?
+				}
+			};
+		} else {
+			this.h = h;
+		}
+        
+        res = this.c.getResources();
+        pi = new PhoneInfo(this.c);
+        mt = new MovementTracker(this.c);
+        smsconfirm = new SMSConfirm();
+        
+        c.registerReceiver(smsconfirm, new IntentFilter(SENT));
+        c.registerReceiver(smsconfirm, new IntentFilter(DELIVERED));
+    }
+	
+	public class SMSConfirm extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().compareTo(SENT) == 0) {
+                if (getResultCode() != SMS_SENT) {
+                    // the attempt to send has failed.
+                    exitWithResult(false, SMS_SENDING, getResultCode());
+                }
+                
+            } else if (intent.getAction().compareTo(DELIVERED) == 0) {
+                if (getResultCode() != SMS_DELIVERED) {
+                    // the attempt to deliver has failed.
+                    exitWithResult(false, SMS_DELIVERY, getResultCode());
+                } else {
+                    exitWithResult(true, SMS_DELIVERY, getResultCode());
+                }
+                
             }
-        };
+        }
+    }
+	
+	public void sendSMS(String recipient, String messageData) {
+        _sentPI = PendingIntent.getBroadcast(this.c, 0, new Intent(SENT), 0);
+        _deliveredPI = PendingIntent.getBroadcast(this.c, 0, new Intent(DELIVERED), 0);
 
-        res = c.getResources();
-        pi = new PhoneInfo(c);
-        sms = new SMSSender(c, h);
-        mt = new MovementTracker(c);
+        SmsManager sms = SmsManager.getDefault();
+
+        ArrayList<String> splitMsg = sms.divideMessage(messageData);
+        for (String msg : splitMsg) {
+            try {
+                sms.sendTextMessage(recipient, null, msg, _sentPI, _deliveredPI);
+            } catch (IllegalArgumentException e) {
+                exitWithResult(false, SMS_INITIATED, SMS_INVALID_NUMBER);
+            } catch (NullPointerException e) {
+                exitWithResult(false, SMS_INITIATED, SMS_INVALID_NUMBER);
+            }
+        }
+    }
+
+    public void exitWithResult(boolean result, int process, int status) {
+        Message smsStatus = new Message();
+        Map<String, Integer> msg = new HashMap<String, Integer>();
+        int r = 1;
+        if (result != false)
+            r = -1;
+
+        msg.put("smsResult", r);
+        msg.put("process", process);
+        msg.put("status", status);
+
+        smsStatus.obj = msg;
+        h.sendMessage(smsStatus);
     }
 
     public String buildShoutMessage(String userMessage) {
@@ -96,13 +173,19 @@ public class ShoutController {
         String shoutMsg = buildShoutMessage(userMessage);
         sendSMSShout(recipients, shoutMsg);
     }
-
+    
     public void sendSMSShout(String recipients, String shoutMsg) {
         StringTokenizer st = new StringTokenizer(recipients, ",");
         while (st.hasMoreTokens()) {
             String recipient = st.nextToken().trim();
-            sms.sendSMS(recipient, shoutMsg + "\n\n(1/2)");
-            sms.sendSMS(recipient, buildShoutData() + "\n\n(2/2)");
+            sendSMS(recipient, shoutMsg + "\n\n(1/2)");
+            sendSMS(recipient, buildShoutData() + "\n\n(2/2)");
         }
+    }
+
+    public void tearDownSMSReceiver() {
+    	try {
+    		c.unregisterReceiver(smsconfirm);
+    	} catch(IllegalArgumentException e) {}
     }
 }

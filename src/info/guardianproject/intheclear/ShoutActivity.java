@@ -167,7 +167,9 @@ public class ShoutActivity extends Activity implements OnClickListener, OnDismis
     }
 
     private void killActivity() {
-        Intent toKill = new Intent(this, EndActivity.class)
+    	sc.tearDownSMSReceiver();
+        
+    	Intent toKill = new Intent(this, EndActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
         startActivity(toKill);

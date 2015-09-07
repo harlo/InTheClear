@@ -28,7 +28,7 @@ public class DimplePanicActivity extends DimplePluginActivity {
 
 	@Override
 	public void createPlugin(boolean longPress, int memorySize) {
-		setResult(RESULT_OK, new Intent().putExtra("data", new byte[0]));
+		setResult(RESULT_OK, new Intent().putExtra("data", new String(getString(R.string.KEY_PANIC_BTN_PANIC).getBytes())));
 		finish();
 	}
 
